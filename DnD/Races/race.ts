@@ -19,8 +19,5 @@ export type languages =
     | 'Orc'
 
 export interface Race<T> {
-    name: string
-    age: number
-    speed: number
     race: T
 }

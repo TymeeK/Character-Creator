@@ -1,8 +1,11 @@
 import type { size, languages } from './race'
 
 export type SubraceAbility = 'Dwarven Toughness' | 'Dwarven Armor Training'
+export type SubraceScoreIncrease = { wis: 1 } | { str: 2 }
+export type ConstitutionIncrease = 2
+export type Speed = 25
+export type name = 'Hill Dwarf' | 'Mountain Dwarf'
 
-//TODO There are various tools we can add
 export type RaceAbility =
     | 'Darkvision'
     | 'Dwarven Combat Training'
@@ -10,26 +13,26 @@ export type RaceAbility =
     | 'Stonecunning'
 
 export interface HillDwarf {
-    name: string
-    abilityScoreIncrease: {
-        wis: number
-    }
+    name: Extract<name, 'Hill Dwarf'>
+    scoreIncrease: Extract<SubraceScoreIncrease, { wis: 1 }>
     ability: Extract<SubraceAbility, 'Dwarven Toughness'>
 }
 
 export interface MountainDwarf {
-    name: string
-    abilityScoreIncrease: {
-        str: number
-    }
+    name: Extract<name, 'Mountain Dwarf'>
+    scoreIncrease: Extract<SubraceScoreIncrease, { str: 2 }>
     ability: Extract<SubraceAbility, 'Dwarven Armor Training'>
 }
 
-type Subrace<T extends HillDwarf | MountainDwarf> = T
-
-export interface Dwarf<T extends Subrace<HillDwarf | MountainDwarf>> {
+export interface Dwarf {
     size: Extract<size, 'Small'>
+    speed: Speed
     languages: Extract<languages, 'Common' | 'Dwarvish'>[]
+    constitutionIncrease: ConstitutionIncrease
     abilities: RaceAbility[]
-    subrace?: T
+}
+
+export interface DwarfSubrace<T extends HillDwarf | MountainDwarf>
+    extends Dwarf {
+    subrace: T
 }

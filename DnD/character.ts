@@ -1,8 +1,9 @@
+import { T } from 'vitest/dist/reporters-OH1c16Kq.js'
+
 export type gender = 'male' | 'female'
 
 export interface Character<T, U> {
     name: string
-    age: number
     race: T
     class: U
     gender: gender
@@ -21,16 +22,7 @@ export interface Modifiers<T extends AbilityScore<number>> {
     modifiers: T
 }
 
-const score: AbilityScore<number> = {
-    str: 10,
-    dex: 10,
-    con: 10,
-    int: 10,
-    wis: 10,
-    cha: 10,
-}
-
-export class PlayerCharacter implements Character<T> {
+export class PlayerCharacter implements Character<T, U> {
     age: number
     name: string
     race: T
