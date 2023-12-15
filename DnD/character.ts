@@ -1,11 +1,11 @@
-export interface Character<T> {
+export type gender = 'male' | 'female'
+
+export interface Character<T, U> {
     name: string
     age: number
     race: T
-    gender: boolean
-    level: number
-    abilityScore: AbilityScore<number>
-    modifiers: Modifiers<AbilityScore<number>>
+    class: U
+    gender: gender
 }
 
 export interface AbilityScore<T extends number> {
@@ -18,7 +18,7 @@ export interface AbilityScore<T extends number> {
 }
 
 export interface Modifiers<T extends AbilityScore<number>> {
-    calculateModifiers: (score: T) => T
+    modifiers: T
 }
 
 const score: AbilityScore<number> = {
@@ -30,16 +30,16 @@ const score: AbilityScore<number> = {
     cha: 10,
 }
 
-// export class Class implements Character {
-//     private name: string
-//     private age: number
-//     private species: string
-//     private gender: boolean
+export class PlayerCharacter implements Character<T> {
+    age: number
+    name: string
+    race: T
+    gender: gender
 
-//     constructor(name: string, age: number, species: string, gender: boolean) {
-//         this.name = name
-//         this.age = age
-//         this.species = species
-//         this.gender = gender
-//     }
-// }
+    constructor(name: string, age: number, race: T, gender: gender) {
+        this.name = name
+        this.age = age
+        this.race = race
+        this.gender = gender
+    }
+}
