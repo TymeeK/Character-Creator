@@ -7,8 +7,19 @@
 // export type Human = 'Human'
 // export type Tiefling = 'Tiefling'
 
-export type size = 'Small' | 'Medium' | 'Large' | 'Huge'
-export type languages =
+import { Dwarf, HillDwarf, MountainDwarf } from './dwarf'
+import { Elf, HighElf, WoodElf } from './elf'
+
+export type Size = 'Small' | 'Medium' | 'Large' | 'Huge'
+export type Races =
+    | Dwarf
+    | Dwarf<HillDwarf>
+    | Dwarf<MountainDwarf>
+    | Elf
+    | Elf<WoodElf>
+    | Elf<HighElf>
+
+export type Languages =
     | 'Common'
     | 'Dwarvish'
     | 'Elvish'
@@ -17,7 +28,3 @@ export type languages =
     | 'Goblin'
     | 'Halfing'
     | 'Orc'
-
-export interface Race<T> {
-    race: T
-}
