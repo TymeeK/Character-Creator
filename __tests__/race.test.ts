@@ -1,16 +1,19 @@
+import { Race } from '@/DnD/Races/race'
 import { expect, describe, test } from 'vitest'
-import {
-    DragonBorn,
-    Dwarf,
-    Elf,
-    Gnome,
-    Halfing,
-    HalfElf,
-    HalfOrc,
-    Human,
-    Tiefling,
-} from '@/DnD/race'
 
-describe('Dwarf interface', () => {
-    const dwarf: Dwarf = 'Dwarf'
+describe('Creating a basic race', () => {
+    const race: Race<string> = {
+        name: 'Gorlock the Destroyer',
+        age: 20,
+        speed: 25,
+        race: 'Dwarf',
+    }
+
+    test('Created race', () => {
+        expect(race).toBeTruthy()
+        expect(race.name).toBe('Gorlock the Destroyer')
+        expect(race.age).toBe(20)
+        expect(race.speed).toBe(25)
+        expect(race.race).toBe('Dwarf')
+    })
 })
