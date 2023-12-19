@@ -1,10 +1,10 @@
 interface Agent {
     name: string
     stats: Statistics<number>
-    derivedStats?: DerivedStats
+    derivedStats?: DerivedStats<number>
 }
 
-interface Statistics<T extends number> {
+type Statistics<T extends number> = {
     str: T
     dex: T
     con: T
@@ -12,20 +12,20 @@ interface Statistics<T extends number> {
     cha: T
 }
 
-type DerivedStats = {
-    hp: number
-    wp: number
-    san: number
-    bp: number
+type DerivedStats<T extends number> = {
+    hp: T
+    wp: T
+    san: T
+    bp: T
 }
 
 type CalculateDerivedStats<T extends Statistics<number>> = (
     stats: T
-) => DerivedStats
+) => DerivedStats<number>
 
 const calculateStats: CalculateDerivedStats<Statistics<number>> = stats => {
     const sanity = stats.pow * 5
-    const derivedStats: DerivedStats = {
+    const derivedStats: DerivedStats<number> = {
         hp: Math.ceil((stats.str + stats.con) / 2),
         wp: stats.pow,
         san: stats.pow * 5,
