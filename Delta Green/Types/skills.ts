@@ -16,7 +16,7 @@ type AnthropologyBaseLevel = 0
 type Archeology = 'Archaeology'
 type ArcheologyBaseLevel = 0
 
-type Art<T> = T
+type Art = string
 type ArtBaseLevel = 0
 
 type Artillery = 'Artillery'
