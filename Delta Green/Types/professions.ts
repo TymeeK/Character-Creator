@@ -1,5 +1,6 @@
 type AnthroOrHistorian = {
     name: 'Anthropologist' | 'Historian'
+    numBonds: 4
     professionalSkills:
         | {
               anthropology: Skill<Anthropology, AnthropologyBaseLevel>

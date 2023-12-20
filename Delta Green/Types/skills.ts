@@ -13,7 +13,7 @@ type AlertnessBaseLevel = 20
 type Anthropology = 'Anthropology'
 type AnthropologyBaseLevel = 0
 
-type Archeology = 'Archaeology'
+type Archeology = 'Archeology'
 type ArcheologyBaseLevel = 0
 
 type Art = string
