@@ -33,3 +33,29 @@ const calculateStats: CalculateDerivedStats<Statistics<number>> = stats => {
     }
     return derivedStats
 }
+
+type Professions = {
+    name: 'Anthropologist' | 'Historian'
+    skills: {
+        anthropology: number
+        bureaucracy: number
+        foreignLanguage: [
+            {
+                name: string
+                level: number
+            },
+            {
+                name: string
+                level: number
+            }
+        ]
+        history: number
+        occult: number
+        persuade: number
+        archaeology?: number
+        humint?: number
+        navigate?: number
+        ride?: number
+        search?: number
+    }
+}
