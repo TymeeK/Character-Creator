@@ -1,7 +1,8 @@
-interface Agent {
+interface Agent<T> {
     name: string
     stats: Statistics<number>
     derivedStats?: DerivedStats<number>
+    profession: T
 }
 
 type Statistics<T extends number> = {
@@ -32,30 +33,4 @@ const calculateStats: CalculateDerivedStats<Statistics<number>> = stats => {
         bp: sanity - stats.pow,
     }
     return derivedStats
-}
-
-type Professions = {
-    name: 'Anthropologist' | 'Historian'
-    skills: {
-        anthropology: number
-        bureaucracy: number
-        foreignLanguage: [
-            {
-                name: string
-                level: number
-            },
-            {
-                name: string
-                level: number
-            }
-        ]
-        history: number
-        occult: number
-        persuade: number
-        archaeology?: number
-        humint?: number
-        navigate?: number
-        ride?: number
-        search?: number
-    }
 }
