@@ -1,7 +1,7 @@
-type Skill<T, U> = {
-    readonly name: T
-    readonly base: U
-    currentLevel?: number
+type Skill<T = void, U = void> = {
+  readonly name: T
+  readonly base: U
+  currentLevel?: number
 }
 
 type Accounting = 'Accounting'
