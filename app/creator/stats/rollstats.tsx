@@ -80,7 +80,7 @@ const RollStats = () => {
 
   return (
     <>
-      <div className='flex bg-red-500'>
+      <div className='flex flex-col h-screen'>
         {stats.map((element, index) => {
           return (
             <RollButton
