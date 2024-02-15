@@ -1,13 +1,16 @@
-import React from 'react'
-import ProfessionDropdown from './dropdown'
+import React, { useState } from 'react'
+import Stats from './stats/stats'
+import { Input } from '@/components/ui/input'
 
 const Creator = () => {
   return (
     <>
-      <div>
-        <h1>Character Creator</h1>
-        <input type="text" placeholder="Character Name" />
-        <ProfessionDropdown />
+      <div className=''>
+        <h1>Agent Creation</h1>
+        <Input type='text' placeholder='Character name' />
+        <h2>How would you like to roll your stats?</h2>
+
+        <Stats title='Stats Method' placeholder='Choose Stats Method' />
       </div>
     </>
   )

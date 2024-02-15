@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import Creator from '../app/creator/page'
+import Stats from '@/app/creator/stats/stats'
 import {
   describe,
   expect,
@@ -32,9 +33,13 @@ describe('Creator title', () => {
   })
 })
 
-describe('Input fields for character attributes', () => {
+describe('Input fields for name', () => {
   beforeEach(() => {
     render(<Creator />)
+  })
+
+  afterEach(() => {
+    cleanup()
   })
 
   it('Character name input exists in documemt', () => {
@@ -50,4 +55,16 @@ describe('Input fields for character attributes', () => {
       'Gorlock the Destroyer'
     )
   })
+})
+
+describe('Dropdown menu for character professions', () => {
+  beforeEach(() => {
+    render(<Stats />)
+  })
+
+  afterEach(() => {
+    cleanup()
+  })
+
+  it()
 })

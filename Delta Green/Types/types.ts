@@ -5,7 +5,7 @@ interface Agent<T> {
   profession: T
 }
 
-type Statistics<T extends number> = {
+export type Statistics<T extends number> = {
   str: T
   dex: T
   con: T
