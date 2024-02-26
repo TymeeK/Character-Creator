@@ -76,7 +76,7 @@ const RollStats = () => {
       <div className='flex h-screen flex-col'>
         {numRolls.current <= 0 ? (
           <Button onClick={rollStats} disabled>
-            Roll Stats
+            Roll Stats ({numRolls.current} tries left)
           </Button>
         ) : (
           <Button onClick={rollStats}>
