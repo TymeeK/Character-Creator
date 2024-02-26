@@ -6,11 +6,11 @@ interface Agent<T> {
 }
 
 export type Statistics<T extends number> = {
-  str: T
-  dex: T
-  con: T
-  pow: T
-  cha: T
+  Strength: T
+  Dexterity: T
+  Constitution: T
+  Power: T
+  Charisma: T
 }
 
 type DerivedStats<T extends number> = {

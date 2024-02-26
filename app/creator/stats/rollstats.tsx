@@ -1,97 +1,95 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Statistics } from '@/Delta Green/Types/types'
 
-interface Stats {
-  label: string
-  onClick: () => void
+type Props = {
+  element: string
+  stats: number
 }
 
-export const RollButton = ({ label, onClick }: Stats) => {
+export const StatLabel: React.FC<Props> = ({ element, stats }) => {
   return (
     <div>
-      <Label>{label}</Label>
-      {/* <Button variant='outline' onClick={onClick}>
-        Roll {label}
-      </Button> */}
+      <Label>{element}: </Label>
+      <Label>{stats}</Label>
     </div>
   )
 }
 
 export const rollValues = (startingValues: number[]) => {
-  for (let i = 0; i < startingValues.length; i++) {
-    startingValues[i] = Math.floor(Math.random() * 6) + 1
-  }
-  return startingValues
+  return startingValues.map(() => Math.floor(Math.random() * 6) + 1)
 }
-
+export const areAllElementsSame = (values: number[]) => {
+  const firstElement = values[0]
+  while (values.every((element) => element === firstElement)) {
+    console.log(`New value: ${values}`)
+    values = rollValues([0, 0, 0, 0])
+  }
+  return values
+}
 export const removeSmallest = (values: number[]) => {
+  console.log(`Values from removeSmallest: ${values}`)
   return values.filter((element) => element !== Math.min(...values))
 }
 
 export const calculateTotal = (values: number[]) => {
+  if (values.length === 0) {
+    removeSmallest(values)
+  }
   return values.reduce((sum, current) => sum + current)
 }
 
 const RollStats = () => {
-  const [str, setStr] = useState<number>()
-  const [dex, setDex] = useState<number>()
-  const [con, setCon] = useState<number>()
-  const [pow, setPow] = useState<number>()
-  const [cha, setCha] = useState<number>()
-
   const [statsNum, setStatsNum] = useState<Statistics<number>>({
-    str: 0,
-    dex: 0,
-    con: 0,
-    pow: 0,
-    cha: 0,
+    Strength: 0,
+    Dexterity: 0,
+    Constitution: 0,
+    Power: 0,
+    Charisma: 0,
   })
+  const numRolls = useRef(3)
 
-  const stats: Stats[] = [
-    { label: 'Strength', onClick: rollStr },
-    { label: 'Dexterity', onClick: rollDex },
-    { label: 'Constitution', onClick: rollCon },
-    { label: 'Power', onClick: rollPow },
-    { label: 'Charisma', onClick: rollCha },
-  ]
-
-  function rollStr() {
-    const strength: number = rollStartingValues()
-    setStr(strength)
-  }
-
-  function rollDex() {
-    const dexterity: number = rollStartingValues()
-    setDex(dexterity)
-  }
-
-  function rollCon() {
-    const constitution: number = rollStartingValues()
-    setCon(constitution)
-  }
-
-  function rollPow() {
-    const power: number = rollStartingValues()
-    setPow(power)
-  }
-
-  function rollCha() {
-    const charisma: number = rollStartingValues()
-    setCha(charisma)
+  const rollStats = () => {
+    const stats: Statistics<number> = {
+      Strength: 0,
+      Dexterity: 0,
+      Constitution: 0,
+      Power: 0,
+      Charisma: 0,
+    }
+    const startingValues = [0, 0, 0, 0]
+    for (const key in stats) {
+      const rolledValues = rollValues(startingValues)
+      const newValues = areAllElementsSame(rolledValues)
+      const removeLowest = removeSmallest(newValues)
+      const total = calculateTotal(removeLowest)
+      stats[key as keyof Statistics<number>] = total
+    }
+    setStatsNum(stats)
+    numRolls.current -= 1
   }
 
   return (
     <>
       <div className='flex h-screen flex-col'>
-        {stats.map((element, index) => {
+        {numRolls.current <= 0 ? (
+          <Button onClick={rollStats} disabled>
+            Roll Stats
+          </Button>
+        ) : (
+          <Button onClick={rollStats}>
+            Roll Stats ({numRolls.current} tries left)
+          </Button>
+        )}
+
+        {Object.keys(statsNum).map((element, index) => {
           return (
-            <RollButton
+            <StatLabel
               key={index}
-              label={element.label}
-              onClick={element.onClick}
+              element={element}
+              stats={statsNum[element as keyof Statistics<number>]}
             />
           )
         })}

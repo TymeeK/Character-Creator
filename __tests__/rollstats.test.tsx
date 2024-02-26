@@ -3,7 +3,10 @@ import RollStats, {
   rollValues,
   removeSmallest,
   calculateTotal,
+  StatLabel,
 } from '@/app/creator/stats/rollstats'
+import { beforeEach } from 'node:test'
+import { render, screen } from '@testing-library/react'
 
 describe('Calculating all stats', () => {
   it('Calculate values greater than 0', () => {
@@ -28,5 +31,17 @@ describe('Calculating all stats', () => {
   it('Sum values in array', () => {
     const total = calculateTotal([5, 4, 3])
     expect(total).toEqual(12)
+  })
+})
+
+describe('Roll Button', () => {
+  const onClick = () => {
+    console.log('Do something')
+  }
+  beforeEach(() => {
+    render(<StatLabel label='strength' onClick={onClick} />)
+  })
+  it('A user can click the roll button', () => {
+    const button = screen.getByTestId('roll-button')
   })
 })
