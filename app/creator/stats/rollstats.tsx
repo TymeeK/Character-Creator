@@ -1,24 +1,38 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import React, { useState } from 'react'
-import { Statistics } from '@/Delta Green/Types/types'
 import { Label } from '@/components/ui/label'
+import { Statistics } from '@/Delta Green/Types/types'
 
 interface Stats {
   label: string
   onClick: () => void
 }
 
-const RollButton = ({ label, onClick }: Stats) => {
+export const RollButton = ({ label, onClick }: Stats) => {
   return (
     <div>
       <Label>{label}</Label>
-      <Button variant='outline' onClick={onClick}>
+      {/* <Button variant='outline' onClick={onClick}>
         Roll {label}
-      </Button>
+      </Button> */}
     </div>
   )
+}
+
+export const rollValues = (startingValues: number[]) => {
+  for (let i = 0; i < startingValues.length; i++) {
+    startingValues[i] = Math.floor(Math.random() * 6) + 1
+  }
+  return startingValues
+}
+
+export const removeSmallest = (values: number[]) => {
+  return values.filter((element) => element !== Math.min(...values))
+}
+
+export const calculateTotal = (values: number[]) => {
+  return values.reduce((sum, current) => sum + current)
 }
 
 const RollStats = () => {
@@ -28,47 +42,13 @@ const RollStats = () => {
   const [pow, setPow] = useState<number>()
   const [cha, setCha] = useState<number>()
 
-  const rollStats = () => {
-    const startingValues = [0, 0, 0, 0]
-    for (let i = 0; i < 4; i++) {
-      const randomRoll = Math.floor(Math.random() * 6) + 1
-      startingValues[i] = randomRoll
-    }
-    const min: number = Math.min(...startingValues)
-    const rollValues: number[] = startingValues.filter(
-      (element: number) => element !== min
-    )
-    const totalValue: number = rollValues.reduce(
-      (sum: number, current: number) => sum + current,
-      0
-    )
-    return totalValue
-  }
-
-  const rollStr = () => {
-    const strength: number = rollStats()
-    setStr(strength)
-  }
-
-  const rollDex = () => {
-    const dexterity: number = rollStats()
-    setDex(dexterity)
-  }
-
-  const rollCon = () => {
-    const constitution: number = rollStats()
-    setCon(constitution)
-  }
-
-  const rollPow = () => {
-    const power: number = rollStats()
-    setPow(power)
-  }
-
-  const rollCha = () => {
-    const charisma: number = rollStats()
-    setCha(charisma)
-  }
+  const [statsNum, setStatsNum] = useState<Statistics<number>>({
+    str: 0,
+    dex: 0,
+    con: 0,
+    pow: 0,
+    cha: 0,
+  })
 
   const stats: Stats[] = [
     { label: 'Strength', onClick: rollStr },
@@ -78,9 +58,34 @@ const RollStats = () => {
     { label: 'Charisma', onClick: rollCha },
   ]
 
+  function rollStr() {
+    const strength: number = rollStartingValues()
+    setStr(strength)
+  }
+
+  function rollDex() {
+    const dexterity: number = rollStartingValues()
+    setDex(dexterity)
+  }
+
+  function rollCon() {
+    const constitution: number = rollStartingValues()
+    setCon(constitution)
+  }
+
+  function rollPow() {
+    const power: number = rollStartingValues()
+    setPow(power)
+  }
+
+  function rollCha() {
+    const charisma: number = rollStartingValues()
+    setCha(charisma)
+  }
+
   return (
     <>
-      <div className='flex flex-col h-screen'>
+      <div className='flex h-screen flex-col'>
         {stats.map((element, index) => {
           return (
             <RollButton

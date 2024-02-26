@@ -1,14 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import Creator from '../app/creator/page'
 import Stats from '@/app/creator/stats/stats'
-import {
-  describe,
-  expect,
-  it,
-  beforeAll,
-  beforeEach,
-  afterEach,
-} from '@jest/globals'
+import { describe, expect, it, beforeEach, afterEach } from '@jest/globals'
 import userEvent from '@testing-library/user-event'
 
 describe('Creator title', () => {
@@ -29,7 +22,7 @@ describe('Creator title', () => {
     const title = screen.getByRole('heading', {
       level: 1,
     })
-    expect(title.innerHTML).toEqual('Character Creator')
+    expect(title.innerHTML).toEqual('Agent Creation')
   })
 })
 
@@ -57,14 +50,14 @@ describe('Input fields for name', () => {
   })
 })
 
-describe('Dropdown menu for character professions', () => {
-  beforeEach(() => {
-    render(<Stats />)
-  })
+// describe('Dropdown menu for character professions', () => {
+//   beforeEach(() => {
+//     render(<Stats />)
+//   })
 
-  afterEach(() => {
-    cleanup()
-  })
+//   afterEach(() => {
+//     cleanup()
+//   })
 
-  it()
-})
+//   it()
+// })

@@ -7,8 +7,8 @@ const Creator = () => {
     <>
       <div className=''>
         <h1>Agent Creation</h1>
-        <Input type='text' placeholder='Character name' />
-        <h2>How would you like to roll your stats?</h2>
+        <Input type='text' placeholder='Character Name' />
+        <h2>How would you like to determine your stats?</h2>
 
         <Stats title='Stats Method' placeholder='Choose Stats Method' />
       </div>
