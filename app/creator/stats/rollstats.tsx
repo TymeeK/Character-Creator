@@ -1,22 +1,8 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import React, { useRef, useState } from 'react'
-import { Label } from '@/components/ui/label'
 import { Statistics } from '@/Delta Green/Types/types'
-
-type Props = {
-  element: string
-  stats: number
-}
-
-export const StatLabel: React.FC<Props> = ({ element, stats }) => {
-  return (
-    <div>
-      <Label>{element}: </Label>
-      <Label>{stats}</Label>
-    </div>
-  )
-}
+import { StatLabel } from './statlabel'
 
 export const rollValues = (startingValues: number[]) => {
   return startingValues.map(() => Math.floor(Math.random() * 6) + 1)

@@ -3,10 +3,10 @@ import RollStats, {
   rollValues,
   removeSmallest,
   calculateTotal,
-  StatLabel,
   areAllElementsSame,
 } from '@/app/creator/stats/rollstats'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { StatLabel } from '@/app/creator/stats/statlabel'
 
 describe('Calculating all stats', () => {
   it('Calculate values greater than 0', () => {
