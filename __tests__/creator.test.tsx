@@ -1,6 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import Creator from '../app/creator/page'
-import Stats from '@/app/creator/stats/stats'
 import { describe, expect, it, beforeEach, afterEach } from '@jest/globals'
 import userEvent from '@testing-library/user-event'
 
