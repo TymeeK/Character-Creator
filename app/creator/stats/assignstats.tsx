@@ -40,6 +40,7 @@ const AssignStats = () => {
               key={index}
               element={element}
               stats={statNums[element as keyof Statistics<number>]}
+              isAssigned={true}
             />
           )
         })}

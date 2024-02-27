@@ -60,6 +60,13 @@ describe('Roll Stats Functional Component', () => {
 })
 
 describe('Test the roll button', () => {
+  const elements = [
+    'Strength',
+    'Dexterity',
+    'Constitution',
+    'Power',
+    'Charisma',
+  ]
   beforeEach(() => {
     render(<RollStats />)
   })
@@ -85,22 +92,23 @@ describe('Test the roll button', () => {
     fireEvent.click(button)
     fireEvent.click(button)
     fireEvent.click(button)
-    expect(button.innerHTML).toEqual('Roll Stats (0 tries left)')
+    expect(button).toBeDisabled()
   })
 
   it('All stat names are displayed properly', () => {
     const button = screen.getByRole('button')
     fireEvent.click(button)
-    const elements = [
-      'Strength',
-      'Dexterity',
-      'Constitution',
-      'Power',
-      'Charisma',
-    ]
+
     for (let i = 0; i < elements.length; i++) {
       const label = screen.getByText(`${elements[i]}:`)
       expect(label.innerHTML).toEqual(`${elements[i]}: `)
+    }
+  })
+
+  it('Stat textboxes do not show up', () => {
+    for (let i = 0; i < elements.length; i++) {
+      const textboxes = screen.queryByPlaceholderText(`${elements[i]} stat`)
+      expect(textboxes).toBeNull()
     }
   })
 })

@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select'
 import React, { useState } from 'react'
 import RollStats from './rollstats'
+import AssignStats from './assignstats'
 
 type props = {
   title: string
@@ -49,7 +50,7 @@ const Stats = ({ title, placeholder }: props) => {
       </Select>
 
       {rollStats !== null && rollStats && <RollStats />}
-      {rollStats !== null && !rollStats && <>Roll stats is false </>}
+      {rollStats !== null && !rollStats && <AssignStats />}
       {rollStats === null && <>Roll stats is null</>}
     </>
   )

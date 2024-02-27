@@ -71,6 +71,7 @@ const RollStats = () => {
               key={index}
               element={element}
               stats={statsNum[element as keyof Statistics<number>]}
+              isAssigned={false}
             />
           )
         })}

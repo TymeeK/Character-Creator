@@ -7,6 +7,7 @@ import AssignStats, {
   isGreaterThanZero as isGreaterThanZero,
 } from '@/app/creator/stats/assignstats'
 import { Statistics } from '@/Delta Green/Types/types'
+import userEvent from '@testing-library/user-event'
 
 describe('Total number of stats calculated', () => {
   const totalStats = 72
@@ -58,5 +59,26 @@ describe('Rendering AssignStats component', () => {
   it('Starting stats is 72', () => {
     const label = screen.getByText('72 points remaining')
     expect(label).toBeInTheDocument()
+  })
+
+  it('Render stat numbers as textboxes', () => {
+    Object.keys(statNames).forEach((element) => {
+      const input = screen.getByPlaceholderText(`${element} stat`)
+      expect(input).toBeInTheDocument()
+    })
+  })
+
+  it('Stat number labels should not render', () => {
+    const label = screen.queryAllByText('0')
+    expect(label).toEqual([])
+  })
+
+  it('Stat should decrease as user types', async () => {
+    const user = userEvent.setup()
+    const stat = screen.getByText('72 points remaining')
+    const textbox = screen.getByPlaceholderText(`Strength stat`)
+
+    await user.type(textbox, '10')
+    expect(stat.innerHTML).toBe('62 points remaining')
   })
 })
