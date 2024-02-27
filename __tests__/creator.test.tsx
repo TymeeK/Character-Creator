@@ -49,15 +49,3 @@ describe('Input fields for name', () => {
     )
   })
 })
-
-// describe('Dropdown menu for character professions', () => {
-//   beforeEach(() => {
-//     render(<Stats />)
-//   })
-
-//   afterEach(() => {
-//     cleanup()
-//   })
-
-//   it()
-// })

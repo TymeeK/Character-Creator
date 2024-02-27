@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Statistics } from '@/Delta Green/Types/types'
 
@@ -24,20 +24,15 @@ export const rollValues = (startingValues: number[]) => {
 export const areAllElementsSame = (values: number[]) => {
   const firstElement = values[0]
   while (values.every((element) => element === firstElement)) {
-    console.log(`New value: ${values}`)
     values = rollValues([0, 0, 0, 0])
   }
   return values
 }
 export const removeSmallest = (values: number[]) => {
-  console.log(`Values from removeSmallest: ${values}`)
   return values.filter((element) => element !== Math.min(...values))
 }
 
 export const calculateTotal = (values: number[]) => {
-  if (values.length === 0) {
-    removeSmallest(values)
-  }
   return values.reduce((sum, current) => sum + current)
 }
 
