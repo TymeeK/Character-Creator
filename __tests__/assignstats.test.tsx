@@ -98,4 +98,8 @@ describe('Rendering AssignStats component', () => {
     }
     expect(stat.innerHTML).toBe('0 points remaining')
   })
+
+  it('Strength input should be updated', () => {
+    const user = userEvent.setup()
+  })
 })

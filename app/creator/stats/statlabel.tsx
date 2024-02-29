@@ -71,6 +71,7 @@ export const StatLabel: React.FC<Props> = ({
                 onClick={changeStats}
                 name='decrement'
                 data-testid='decrement'
+                data-element={element}
               >
                 -
               </Button>
