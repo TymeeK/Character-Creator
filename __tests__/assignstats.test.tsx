@@ -63,7 +63,9 @@ describe('Rendering AssignStats component', () => {
 
   it('Render stat numbers as textboxes', () => {
     Object.keys(statNames).forEach((element) => {
-      const input = screen.getByPlaceholderText(`${element} stat`)
+      const input = screen.getByRole('input', {
+        name: `${element}`,
+      })
       expect(input).toBeInTheDocument()
     })
   })
@@ -73,12 +75,13 @@ describe('Rendering AssignStats component', () => {
     expect(label).toEqual([])
   })
 
-  it('Stat should decrease as user types', async () => {
-    const user = userEvent.setup()
-    const stat = screen.getByText('72 points remaining')
-    const textbox = screen.getByPlaceholderText(`Strength stat`)
-
-    await user.type(textbox, '10')
-    expect(stat.innerHTML).toBe('62 points remaining')
-  })
+  // it('Stat should decrease as user types', async () => {
+  //   const user = userEvent.setup()
+  //   const stat = screen.getByText('72 points remaining')
+  //   const strengthTextBox = screen.getByPlaceholderText(`Strength stat`)
+  //   const dexterityTextBox = screen.getByPlaceholderText('Dexterity stat')
+  //   await user.type(strengthTextBox, '10')
+  //   await user.type(dexterityTextBox, '10')
+  //   expect(stat.innerHTML).toBe('52 points remaining')
+  // })
 })

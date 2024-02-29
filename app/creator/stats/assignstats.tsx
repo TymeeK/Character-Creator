@@ -1,15 +1,15 @@
 'use client'
 import { Statistics } from '@/Delta Green/Types/types'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import { StatLabel } from './statlabel'
 
-export const subtract = (statPoints: number, numToSubtract: number): number => {
-  return statPoints - numToSubtract
+export const subtract = (statPoints: number, num: number): number => {
+  return statPoints - num
 }
 
-export const add = (statPoints: number, numToSubtract: number): number => {
-  return statPoints + numToSubtract
+export const add = (statPoints: number, num: number): number => {
+  return statPoints + num
 }
 
 export const isLessThanDefault = (statPoints: number): boolean => {
@@ -29,6 +29,36 @@ const AssignStats = () => {
     Power: 0,
     Charisma: 0,
   })
+  const [str, setStr] = useState<number>(0)
+  const [dex, setDex] = useState<number>(0)
+  const [con, setCon] = useState<number>(0)
+  const [pow, setPow] = useState<number>(0)
+  const [cha, setCha] = useState<number>(0)
+
+  const prev = useRef(0)
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name
+    const value: unknown = e.target.value as unknown
+    const stat: number = value as number
+    switch (name) {
+      case 'Strength':
+        setStr(stat)
+        break
+      case 'Dexterity':
+        setDex(stat)
+        break
+      case 'Constitution':
+        setCon(stat)
+        break
+      case 'Power':
+        setPow(stat)
+        break
+      case 'Charisma':
+        setCha(stat)
+        break
+    }
+  }
 
   return (
     <>
@@ -41,6 +71,7 @@ const AssignStats = () => {
               element={element}
               stats={statNums[element as keyof Statistics<number>]}
               isAssigned={true}
+              onChange={onChange}
             />
           )
         })}

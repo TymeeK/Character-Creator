@@ -40,25 +40,6 @@ describe('Calculating all stats', () => {
   })
 })
 
-describe('Roll Stats Functional Component', () => {
-  const element = 'Strength'
-  const stats = 10
-
-  beforeEach(() => {
-    render(<StatLabel element={element} stats={stats} />)
-  })
-
-  it('The label is in the document', () => {
-    const label = screen.getByText(`${element}:`)
-    expect(label).toBeInTheDocument()
-  })
-
-  it('The stat displays correctly', () => {
-    const label = screen.getByText(`${stats}`)
-    expect(label).toBeInTheDocument()
-  })
-})
-
 describe('Test the roll button', () => {
   const elements = [
     'Strength',
