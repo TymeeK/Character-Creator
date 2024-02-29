@@ -1,7 +1,7 @@
 'use client'
 import { Statistics } from '@/Delta Green/Types/types'
 import { Label } from '@/components/ui/label'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { StatLabel } from './statlabel'
 
 export const subtract = (statPoints: number, num: number): number => {
@@ -35,6 +35,13 @@ const AssignStats = () => {
   const [pow, setPow] = useState<number>(0)
   const [cha, setCha] = useState<number>(0)
 
+  const changeStats = (e) => {
+    e.preventDefault()
+    const decrement = subtract(statPoints, 1)
+    console.log('Hello!!!!')
+    setStatPoints(decrement)
+  }
+
   return (
     <>
       <div>
@@ -46,6 +53,7 @@ const AssignStats = () => {
               element={element}
               stats={statNums[element as keyof Statistics<number>]}
               isAssigned={true}
+              changeStats={changeStats}
             />
           )
         })}

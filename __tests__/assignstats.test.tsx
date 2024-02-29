@@ -73,13 +73,15 @@ describe('Rendering AssignStats component', () => {
     expect(label).toEqual([])
   })
 
-  // it('Stat should decrease as user types', async () => {
-  //   const user = userEvent.setup()
-  //   const stat = screen.getByText('72 points remaining')
-  //   const strengthTextBox = screen.getByPlaceholderText(`Strength stat`)
-  //   const dexterityTextBox = screen.getByPlaceholderText('Dexterity stat')
-  //   await user.type(strengthTextBox, '10')
-  //   await user.type(dexterityTextBox, '10')
-  //   expect(stat.innerHTML).toBe('52 points remaining')
-  // })
+  it('Stat should decrease', async () => {
+    const user = userEvent.setup()
+    const stat = screen.getByText('72 points remaining')
+    const incrementButton = screen.getAllByRole('button', {
+      name: '+',
+    })
+    await user.click(incrementButton[0])
+    expect(stat.innerHTML).toBe('71 points remaining')
+  })
+
+  it('Stat should increase', async () => {})
 })

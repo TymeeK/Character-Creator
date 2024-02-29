@@ -20,7 +20,7 @@ type Props = {
   element: string
   stats: number
   isAssigned: boolean
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  changeStats?: () => void
 }
 
 const formSchema = z.object({
@@ -31,7 +31,7 @@ export const StatLabel: React.FC<Props> = ({
   element,
   stats,
   isAssigned,
-  onChange,
+  changeStats,
 }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,36 +40,37 @@ export const StatLabel: React.FC<Props> = ({
     },
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
-  }
   return (
     <div>
       {isAssigned && (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} name='form'>
-            <FormField
-              control={form.control}
-              name='element'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{element}: </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={`${stats}`}
-                      {...field}
-                      disabled
-                      name={element}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type='submit'>-</Button>
-            <Button type='submit'>+</Button>
-          </form>
-        </Form>
+        <>
+          <Form {...form}>
+            <form onSubmit={changeStats} name='form'>
+              <FormField
+                control={form.control}
+                name='element'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{element}: </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={`${stats}`}
+                        {...field}
+                        disabled
+                        name={element}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type='submit'>-</Button>
+              <Button type='submit' name='increment'>
+                +
+              </Button>
+            </form>
+          </Form>
+        </>
       )}
       {!isAssigned && (
         <>
