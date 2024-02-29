@@ -62,12 +62,10 @@ describe('Rendering AssignStats component', () => {
   })
 
   it('Render stat numbers as textboxes', () => {
-    Object.keys(statNames).forEach((element) => {
-      const input = screen.getByRole('input', {
-        name: `${element}`,
-      })
-      expect(input).toBeInTheDocument()
-    })
+    const input = screen.getAllByPlaceholderText('0')
+    for (let i = 0; i < input.length; i++) {
+      expect(input[i]).toBeDisabled()
+    }
   })
 
   it('Stat number labels should not render', () => {
