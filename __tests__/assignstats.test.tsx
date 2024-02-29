@@ -76,12 +76,26 @@ describe('Rendering AssignStats component', () => {
   it('Stat should decrease', async () => {
     const user = userEvent.setup()
     const stat = screen.getByText('72 points remaining')
-    const incrementButton = screen.getAllByRole('button', {
-      name: '+',
-    })
+    const incrementButton = screen.getAllByTestId('increment')
     await user.click(incrementButton[0])
     expect(stat.innerHTML).toBe('71 points remaining')
   })
 
-  it('Stat should increase', async () => {})
+  it('Stat should increase', async () => {
+    const user = userEvent.setup()
+    const stat = screen.getByText('72 points remaining')
+    const decrementButton = screen.getAllByTestId('decrement')
+    await user.click(decrementButton[0])
+    expect(stat.innerHTML).toBe('72 points remaining')
+  })
+
+  it("Stat shouldn't go below 0", async () => {
+    const user = userEvent.setup()
+    const stat = screen.getByText('72 points remaining')
+    const incrementButton = screen.getAllByTestId('increment')
+    for (let i = 0; i < 75; i++) {
+      await user.click(incrementButton[0])
+    }
+    expect(stat.innerHTML).toBe('0 points remaining')
+  })
 })

@@ -28,7 +28,7 @@ describe('StatLabel for AssignStats page', () => {
     render(<StatLabel element={element} stats={stats} isAssigned={true} />)
   })
   it('Form tag exists', () => {
-    const form = screen.getByRole('form')
+    const form = screen.getByTestId('test-id')
     expect(form).toBeInTheDocument()
   })
 

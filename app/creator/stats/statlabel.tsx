@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
@@ -20,7 +20,7 @@ type Props = {
   element: string
   stats: number
   isAssigned: boolean
-  changeStats?: () => void
+  changeStats?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const formSchema = z.object({
@@ -39,13 +39,16 @@ export const StatLabel: React.FC<Props> = ({
       element: '',
     },
   })
+  const onSubmit = () => {
+    console.log('Hello')
+  }
 
   return (
     <div>
       {isAssigned && (
         <>
           <Form {...form}>
-            <form onSubmit={changeStats} name='form'>
+            <form onSubmit={onSubmit} data-testid='test-id'>
               <FormField
                 control={form.control}
                 name='element'
@@ -64,8 +67,18 @@ export const StatLabel: React.FC<Props> = ({
                   </FormItem>
                 )}
               />
-              <Button type='submit'>-</Button>
-              <Button type='submit' name='increment'>
+              <Button
+                onClick={changeStats}
+                name='decrement'
+                data-testid='decrement'
+              >
+                -
+              </Button>
+              <Button
+                onClick={changeStats}
+                name='increment'
+                data-testid='increment'
+              >
                 +
               </Button>
             </form>

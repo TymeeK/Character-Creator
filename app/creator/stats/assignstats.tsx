@@ -4,20 +4,20 @@ import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { StatLabel } from './statlabel'
 
-export const subtract = (statPoints: number, num: number): number => {
-  return statPoints - num
-}
-
-export const add = (statPoints: number, num: number): number => {
-  return statPoints + num
-}
-
 export const isLessThanDefault = (statPoints: number): boolean => {
-  return statPoints <= 72 ? true : false
+  return statPoints < 72 ? true : false
 }
 
 export const isGreaterThanZero = (statPoints: number): boolean => {
   return statPoints > 0 ? true : false
+}
+
+export const subtract = (statPoints: number, num: number): number => {
+  return isGreaterThanZero(statPoints) ? statPoints - num : statPoints
+}
+
+export const add = (statPoints: number, num: number): number => {
+  return isLessThanDefault(statPoints) ? statPoints + num : statPoints
 }
 
 const AssignStats = () => {
@@ -35,11 +35,11 @@ const AssignStats = () => {
   const [pow, setPow] = useState<number>(0)
   const [cha, setCha] = useState<number>(0)
 
-  const changeStats = (e) => {
+  const changeStats = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    const decrement = subtract(statPoints, 1)
-    console.log('Hello!!!!')
-    setStatPoints(decrement)
+    const button = e.target as HTMLButtonElement
+    if (button.name === 'increment') setStatPoints(subtract(statPoints, 1))
+    else setStatPoints(add(statPoints, 1))
   }
 
   return (
