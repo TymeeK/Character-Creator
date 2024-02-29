@@ -5,6 +5,7 @@ import AssignStats, {
   add,
   isLessThanDefault as isLessThanDefault,
   isGreaterThanZero as isGreaterThanZero,
+  isMax,
 } from '@/app/creator/stats/assignstats'
 import { Statistics } from '@/Delta Green/Types/types'
 import userEvent from '@testing-library/user-event'
@@ -12,6 +13,7 @@ import userEvent from '@testing-library/user-event'
 describe('Total number of stats calculated', () => {
   const totalStats = 72
   const amountToSubtract = 10
+  const maxStats = 18
 
   it('Subtract from starting stats', () => {
     const value = subtract(totalStats, amountToSubtract)
@@ -42,6 +44,10 @@ describe('Total number of stats calculated', () => {
     const statTotal = isGreaterThanZero(10)
     expect(statTotal).toBeTruthy()
   })
+  it('Stats are maxed out', () => {
+    const max = isMax(maxStats)
+    expect(max).toBeTruthy()
+  })
 })
 
 describe('Rendering AssignStats component', () => {
@@ -61,16 +67,11 @@ describe('Rendering AssignStats component', () => {
     expect(label).toBeInTheDocument()
   })
 
-  it('Render stat numbers as textboxes', () => {
-    const input = screen.getAllByPlaceholderText('0')
+  it('Render stat numbers as labels', () => {
+    const input = screen.getAllByText('0')
     for (let i = 0; i < input.length; i++) {
-      expect(input[i]).toBeDisabled()
+      expect(input[i]).toBeInTheDocument()
     }
-  })
-
-  it('Stat number labels should not render', () => {
-    const label = screen.queryAllByText('0')
-    expect(label).toEqual([])
   })
 
   it('Stat should decrease', async () => {
@@ -99,7 +100,34 @@ describe('Rendering AssignStats component', () => {
     expect(stat.innerHTML).toBe('0 points remaining')
   })
 
-  it('Strength input should be updated', () => {
+  it('Input should be updated by 1 if incremented', async () => {
     const user = userEvent.setup()
+
+    const label = screen.getAllByText('0')
+    const increment = screen.getAllByTestId('increment')
+    for (let i = 0; i < label.length; i++) {
+      await user.click(increment[i])
+      expect(label[i].innerHTML).toBe('1')
+    }
+  })
+
+  it('Label should be decremented when clicking decrement', async () => {
+    const user = userEvent.setup()
+    const label = screen.getAllByText('0')
+    const decrement = screen.getAllByTestId('decrement')
+    for (let i = 0; i < label.length; i++) {
+      await user.click(decrement[i])
+      expect(label[i].innerHTML).toBe('0')
+    }
+  })
+
+  it('Label should not go past 18', async () => {
+    const user = userEvent.setup()
+    const label = screen.getAllByText('0')
+    const increment = screen.getAllByTestId('increment')
+    for (let i = 0; i < 19; i++) {
+      await user.click(increment[0])
+    }
+    expect(label[0].innerHTML).toBe('18')
   })
 })

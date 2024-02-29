@@ -4,7 +4,7 @@
   "private": true,
   "prettier": {
     "tabWidth": 2,
-    "arrowParens": "always",
+    "arrowParens": "avoid",
     "singleQuote": true,
     "jsxSingleQuote": true,
     "semi": false

@@ -81,8 +81,8 @@ describe('Test the roll button', () => {
     fireEvent.click(button)
 
     for (let i = 0; i < elements.length; i++) {
-      const label = screen.getByText(`${elements[i]}:`)
-      expect(label.innerHTML).toEqual(`${elements[i]}: `)
+      const label = screen.getByText(`${elements[i]}`)
+      expect(label.innerHTML).toEqual(`${elements[i]}`)
     }
   })
 
@@ -91,5 +91,19 @@ describe('Test the roll button', () => {
       const textboxes = screen.queryByPlaceholderText(`${elements[i]} stat`)
       expect(textboxes).toBeNull()
     }
+  })
+
+  it('increment button does not show up', () => {
+    const incrementButton = screen.queryByRole('button', {
+      name: 'increment',
+    })
+    expect(incrementButton).toBeNull()
+  })
+
+  it('decrement button does not show up', () => {
+    const decrementButton = screen.queryByRole('button', {
+      name: 'decrement',
+    })
+    expect(decrementButton).toBeNull()
   })
 })

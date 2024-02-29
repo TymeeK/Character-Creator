@@ -11,7 +11,7 @@ describe('StatLabel for RollStats Component', () => {
   })
 
   it('The element is in the document', () => {
-    const label = screen.getByText(`${element}:`)
+    const label = screen.getByText(`${element}`)
     expect(label).toBeInTheDocument()
   })
 
@@ -26,10 +26,6 @@ describe('StatLabel for AssignStats page', () => {
   const stats = 18
   beforeEach(() => {
     render(<StatLabel element={element} stats={stats} isAssigned={true} />)
-  })
-  it('Form tag exists', () => {
-    const form = screen.getByTestId('test-id')
-    expect(form).toBeInTheDocument()
   })
 
   it('+ button for increasing stats', () => {
