@@ -55,6 +55,7 @@ describe('Rendering AssignStats component', () => {
     Strength: 0,
     Dexterity: 0,
     Constitution: 0,
+    Intelligence: 0,
     Power: 0,
     Charisma: 0,
   }
@@ -146,5 +147,73 @@ describe('Rendering AssignStats component', () => {
     await user.click(decrement[1])
     await user.click(decrement[1])
     expect(label.innerHTML).toBe('54 points remaining')
+  })
+
+  it('Increment value by 5', async () => {
+    const label = screen.getByText('72 points remaining')
+    const increment = screen.getAllByTestId('increment')
+    await user.keyboard('{Shift>}')
+    await user.click(increment[0])
+    await user.keyboard('{/Shift}')
+    expect(label.innerHTML).toBe('67 points remaining')
+  })
+
+  it('Decrement value by 5', async () => {
+    const label = screen.getByText('72 points remaining')
+    const increment = screen.getAllByTestId('increment')
+    await user.keyboard('{Shift>}')
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.keyboard('{/Shift}')
+
+    const decrement = screen.getAllByTestId('decrement')
+    await user.keyboard('{Shift>}')
+    await user.click(decrement[0])
+    await user.click(decrement[0])
+    await user.keyboard('{/Shift}')
+    expect(label.innerHTML).toBe('64 points remaining')
+  })
+
+  it('Value cannot be greater than 18 if incremented by 5', async () => {
+    const statLabel = screen.getAllByText('0')
+    const increment = screen.getAllByTestId('increment')
+    await user.keyboard('{Shift>}')
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.click(increment[0])
+    await user.keyboard('{/Shift}')
+
+    expect(statLabel[0].innerHTML).toBe('18')
+  })
+
+  it('Value cannot be lower than 18 if decremented by 5', async () => {
+    const statLabel = screen.getAllByText('0')
+    const label = screen.getByText('72 points remaining')
+    const increment = screen.getAllByTestId('increment')
+    await user.click(increment[0])
+    const decrement = screen.getAllByTestId('decrement')
+    await user.keyboard('{Shift>}')
+    await user.click(decrement[0])
+    await user.keyboard('{/Shift}')
+    expect(statLabel[0].innerHTML).toBe('0')
+    expect(label.innerHTML).toBe('72 points remaining')
+  })
+
+  it('Cannot add more values if remaining stat points are 0', async () => {
+    const label = screen.getByText('72 points remaining')
+    const increment = screen.getAllByTestId('increment')
+    for (let i = 0; i < increment.length; i++) {
+      for (let j = 0; j < 4; j++) {
+        await user.keyboard('{Shift>}')
+        await user.click(increment[i])
+        await user.keyboard('{/Shift}')
+      }
+    }
+    expect(label.innerHTML).toBe('0 points remaining')
   })
 })
