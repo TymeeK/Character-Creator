@@ -58,6 +58,8 @@ describe('Rendering AssignStats component', () => {
     Power: 0,
     Charisma: 0,
   }
+  const user = userEvent.setup()
+
   beforeEach(() => {
     render(<AssignStats />)
   })
@@ -75,7 +77,6 @@ describe('Rendering AssignStats component', () => {
   })
 
   it('Stat should decrease', async () => {
-    const user = userEvent.setup()
     const stat = screen.getByText('72 points remaining')
     const incrementButton = screen.getAllByTestId('increment')
     await user.click(incrementButton[0])
@@ -83,7 +84,6 @@ describe('Rendering AssignStats component', () => {
   })
 
   it('Stat should increase', async () => {
-    const user = userEvent.setup()
     const stat = screen.getByText('72 points remaining')
     const decrementButton = screen.getAllByTestId('decrement')
     await user.click(decrementButton[0])
@@ -91,18 +91,17 @@ describe('Rendering AssignStats component', () => {
   })
 
   it("Stat shouldn't go below 0", async () => {
-    const user = userEvent.setup()
     const stat = screen.getByText('72 points remaining')
     const incrementButton = screen.getAllByTestId('increment')
-    for (let i = 0; i < 75; i++) {
-      await user.click(incrementButton[0])
+    for (let i = 0; i < 18; i++) {
+      for (let j = 0; j < 5; j++) {
+        await user.click(incrementButton[j])
+      }
     }
     expect(stat.innerHTML).toBe('0 points remaining')
   })
 
   it('Input should be updated by 1 if incremented', async () => {
-    const user = userEvent.setup()
-
     const label = screen.getAllByText('0')
     const increment = screen.getAllByTestId('increment')
     for (let i = 0; i < label.length; i++) {
@@ -112,7 +111,6 @@ describe('Rendering AssignStats component', () => {
   })
 
   it('Label should be decremented when clicking decrement', async () => {
-    const user = userEvent.setup()
     const label = screen.getAllByText('0')
     const decrement = screen.getAllByTestId('decrement')
     for (let i = 0; i < label.length; i++) {
@@ -122,12 +120,31 @@ describe('Rendering AssignStats component', () => {
   })
 
   it('Label should not go past 18', async () => {
-    const user = userEvent.setup()
     const label = screen.getAllByText('0')
     const increment = screen.getAllByTestId('increment')
-    for (let i = 0; i < 19; i++) {
+    for (let i = 0; i < 21; i++) {
       await user.click(increment[0])
     }
     expect(label[0].innerHTML).toBe('18')
+  })
+  const checkIfMaxOrZero = async () => {
+    const label = screen.getByText('72 points remaining')
+    const increment = screen.getAllByTestId('increment')
+    for (let i = 0; i < 20; i++) {
+      await user.click(increment[0])
+    }
+    return label
+  }
+  it('Label should not increase if stat is 18', async () => {
+    const label = await checkIfMaxOrZero()
+    expect(label.innerHTML).toBe('54 points remaining')
+  })
+
+  it('Label should not decrease if stat is at 0', async () => {
+    const label = await checkIfMaxOrZero()
+    const decrement = screen.getAllByTestId('decrement')
+    await user.click(decrement[1])
+    await user.click(decrement[1])
+    expect(label.innerHTML).toBe('54 points remaining')
   })
 })

@@ -30,6 +30,7 @@ const AssignStats = () => {
     Strength: 0,
     Dexterity: 0,
     Constitution: 0,
+    Intelligence: 0,
     Power: 0,
     Charisma: 0,
   })
@@ -37,26 +38,31 @@ const AssignStats = () => {
   const changeStats = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const button = e.target as HTMLButtonElement
-
-    button.name === 'increment'
-      ? setStatPoints(subtract(statPoints, 1))
-      : setStatPoints(add(statPoints, 1))
-
     const element = button.dataset.element as keyof Statistics<number>
 
-    button.name === 'increment'
-      ? setStatNums(prevState => ({
-          ...prevState,
-          [element]: isMax(prevState[element])
-            ? prevState[element]
-            : prevState[element] + 1,
-        }))
-      : setStatNums(prevState => ({
-          ...prevState,
-          [element]: isGreaterThanZero(prevState[element])
-            ? prevState[element] - 1
-            : prevState[element],
-        }))
+    if (button.name === 'increment') {
+      isMax(statNums[element])
+        ? setStatPoints(prev => prev)
+        : setStatPoints(subtract(statPoints, 1))
+
+      setStatNums(prevState => ({
+        ...prevState,
+        [element]: isMax(prevState[element])
+          ? prevState[element]
+          : prevState[element] + 1,
+      }))
+    } else {
+      isGreaterThanZero(statNums[element])
+        ? setStatPoints(add(statPoints, 1))
+        : setStatPoints(prev => prev)
+
+      setStatNums(prevState => ({
+        ...prevState,
+        [element]: isGreaterThanZero(prevState[element])
+          ? prevState[element] - 1
+          : prevState[element],
+      }))
+    }
   }
 
   return (
