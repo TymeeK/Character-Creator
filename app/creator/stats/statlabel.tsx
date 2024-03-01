@@ -22,14 +22,28 @@ export const StatLabel: React.FC<Props> = ({
     <div>
       <Label className='mr-2'>{element}</Label>
       {isAssigned && (
-        <Button
-          onClick={changeStats}
-          name='decrement'
-          data-testid='decrement'
-          data-element={element}
-        >
-          -
-        </Button>
+        <>
+          {statPoints === 72 ? (
+            <Button
+              onClick={changeStats}
+              name='decrement'
+              data-testid='decrement'
+              data-element={element}
+              disabled
+            >
+              -
+            </Button>
+          ) : (
+            <Button
+              onClick={changeStats}
+              name='decrement'
+              data-testid='decrement'
+              data-element={element}
+            >
+              -
+            </Button>
+          )}
+        </>
       )}
       <Label className='mr-2'>{stats}</Label>
       {isAssigned && (
