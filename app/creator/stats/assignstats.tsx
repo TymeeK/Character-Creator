@@ -24,8 +24,8 @@ export const isMax = (stat: number): boolean => {
   return stat >= 18 ? true : false
 }
 const AssignStats = () => {
-  const [statPoints, setStatPoints] = useState(72)
-  const [statNums, setStatNums] = useState<Statistics<number>>({
+  const [statPool, setStatPool] = useState(72)
+  const [statPoint, setStatPoint] = useState<Statistics<number>>({
     Strength: 0,
     Dexterity: 0,
     Constitution: 0,
@@ -34,91 +34,114 @@ const AssignStats = () => {
     Charisma: 0,
   })
 
+  const removeFromStatPool = (
+    element: keyof Statistics<number>,
+    delta: number
+  ) => {
+    isMax(statPoint[element])
+      ? setStatPool(prev => prev)
+      : setStatPool(subtract(statPool, delta))
+  }
+
+  const addToStatPoints = (
+    element: keyof Statistics<number>,
+    delta: number
+  ) => {
+    setStatPoint(prevState => ({
+      ...prevState,
+      [element]: isMax(prevState[element])
+        ? prevState[element]
+        : add(prevState[element], delta),
+    }))
+  }
+
   const incrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    deltaValue: number
+    delta: number
   ) => {
     if (button.name !== 'increment') {
       return
     }
-    isMax(statNums[element])
-      ? setStatPoints(prev => prev)
-      : setStatPoints(subtract(statPoints, deltaValue))
+    removeFromStatPool(element, delta)
+    addToStatPoints(element, delta)
+  }
 
-    setStatNums(prevState => ({
+  const addToStatPool = (element: keyof Statistics<number>, delta: number) => {
+    isGreaterThanZero(statPoint[element])
+      ? setStatPool(add(statPool, delta))
+      : setStatPool(prev => prev)
+  }
+
+  const removeStatPoints = (
+    element: keyof Statistics<number>,
+    delta: number
+  ) => {
+    setStatPoint(prevState => ({
       ...prevState,
-      [element]: isMax(prevState[element])
-        ? prevState[element]
-        : add(prevState[element], deltaValue),
+      [element]: isGreaterThanZero(prevState[element])
+        ? subtract(prevState[element], delta)
+        : prevState[element],
     }))
   }
   const decrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    deltaValue: number
+    delta: number
   ) => {
     if (button.name !== 'decrement') {
       return
     }
-
-    isGreaterThanZero(statNums[element])
-      ? setStatPoints(add(statPoints, deltaValue))
-      : setStatPoints(prev => prev)
-
-    setStatNums(prevState => ({
-      ...prevState,
-      [element]: isGreaterThanZero(prevState[element])
-        ? subtract(prevState[element], deltaValue)
-        : prevState[element],
-    }))
+    addToStatPool(element, delta)
+    removeStatPoints(element, delta)
   }
 
   const changeStats = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const button = e.target as HTMLButtonElement
     const element = button.dataset.element as keyof Statistics<number>
-    let deltaValue = 1
+    let delta = 1
     let greaterThanMax = 0
-    let lessThanZero = statNums[element]
+    let lessThanZero = statPoint[element]
 
     if (e.shiftKey) {
-      deltaValue = 5
-      greaterThanMax = add(statNums[element], deltaValue)
-      lessThanZero = subtract(statNums[element], deltaValue)
+      delta = 5
+      greaterThanMax = add(statPoint[element], delta)
+      lessThanZero = subtract(statPoint[element], delta)
     }
     if (isMax(greaterThanMax) && button.name === 'increment') {
-      const difference = subtract(statNums[element], 18)
-      setStatPoints(prevState => add(prevState, difference))
-      setStatNums(prevState => ({
+      const difference = subtract(statPoint[element], 18)
+      setStatPool(prevState => add(prevState, difference))
+      setStatPoint(prevState => ({
         ...prevState,
         [element]: 18,
       }))
       return
     }
     if (!isGreaterThanZero(lessThanZero) && button.name === 'decrement') {
-      const sum = add(statNums[element], 0)
-      setStatPoints(prevState => add(prevState, sum))
-      setStatNums(prevState => ({ ...prevState, [element]: 0 }))
+      const sum = add(statPoint[element], 0)
+      setStatPool(prevState => add(prevState, sum))
+      setStatPoint(prevState => ({ ...prevState, [element]: 0 }))
       return
     }
-    incrementStat(button, element, deltaValue)
-    decrementStat(button, element, deltaValue)
+
+    incrementStat(button, element, delta)
+    decrementStat(button, element, delta)
   }
 
   return (
     <>
       <div>
-        <Label>{statPoints} points remaining</Label>
-        {Object.keys(statNums).map((element, index) => {
+        <Label>{statPool} points remaining</Label>
+        {Object.keys(statPoint).map((element, index) => {
           return (
             <StatLabel
               key={index}
               element={element}
-              stats={statNums[element as keyof Statistics<number>]}
+              stats={statPoint[element as keyof Statistics<number>]}
               isAssigned={true}
               changeStats={changeStats}
-              statPoints={statPoints}
+              statPoints={statPool}
             />
           )
         })}

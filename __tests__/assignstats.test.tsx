@@ -51,14 +51,6 @@ describe('Total number of stats calculated', () => {
 })
 
 describe('Rendering AssignStats component', () => {
-  const statNames: Statistics<number> = {
-    Strength: 0,
-    Dexterity: 0,
-    Constitution: 0,
-    Intelligence: 0,
-    Power: 0,
-    Charisma: 0,
-  }
   const user = userEvent.setup()
 
   beforeEach(() => {
