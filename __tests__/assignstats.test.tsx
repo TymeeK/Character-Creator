@@ -211,3 +211,59 @@ describe('Rendering AssignStats component', () => {
     expect(label.innerHTML).toBe('0 points remaining')
   })
 })
+
+describe('Rendering table', () => {
+  beforeEach(() => {
+    render(<AssignStats />)
+  })
+
+  it('Table is available', () => {
+    const table = screen.getByRole('table')
+    expect(table).toBeInTheDocument()
+  })
+
+  it('Table header is available', () => {
+    const cell = screen.getAllByRole('rowgroup')
+    expect(cell[0]).toBeInTheDocument()
+  })
+
+  it('Table Row is available', () => {
+    const tr = screen.getAllByRole('row')
+    expect(tr[0]).toBeInTheDocument()
+  })
+
+  it('First header for stats', () => {
+    const th = screen.getAllByRole('columnheader')
+    expect(th[0].innerHTML).toBe('Stats')
+  })
+
+  it('Stat Number header', () => {
+    const th = screen.getAllByRole('columnheader')
+    expect(th[1].innerHTML).toBe('Stat Points')
+  })
+
+  it('Table has a body', () => {
+    const tbody = screen.getAllByRole('rowgroup')
+    expect(tbody[1]).toBeInTheDocument()
+  })
+
+  it('Table Body has a Table Row', () => {
+    const tr = screen.getAllByRole('row')
+    expect(tr[1]).toBeInTheDocument()
+  })
+
+  it('Second Table Row has a table cell', () => {
+    const tCell = screen.getAllByRole('cell')
+    expect(tCell).toBeTruthy()
+  })
+
+  it('Second Table Row has inner text', () => {
+    const tCell = screen.getAllByRole('cell')
+    expect(tCell[0].innerHTML).toBe('Strength')
+  })
+
+  it('Second Table Row has a table cell with disabled decrement button', () => {
+    const tCell = screen.getAllByRole('cell')
+    expect(tCell[1]).toBeInTheDocument()
+  })
+})

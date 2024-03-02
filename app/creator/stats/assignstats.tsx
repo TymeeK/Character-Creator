@@ -3,6 +3,14 @@ import { Statistics } from '@/Delta Green/Types/types'
 import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { StatLabel } from './statlabel'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 export const isLessThanDefault = (statPoints: number): boolean => {
   return statPoints < 72 ? true : false
@@ -145,18 +153,29 @@ const AssignStats = () => {
     <>
       <div>
         <Label>{statPool} points remaining</Label>
-        {Object.keys(statPoint).map((element, index) => {
-          return (
-            <StatLabel
-              key={index}
-              element={element}
-              stats={statPoint[element as keyof Statistics<number>]}
-              isAssigned={true}
-              changeStats={changeStats}
-              statPoints={statPool}
-            />
-          )
-        })}
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Stats</TableHead>
+              <TableHead>Stat Points</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.keys(statPoint).map((element, index) => {
+              return (
+                <TableRow key={index}>
+                  <StatLabel
+                    element={element}
+                    stats={statPoint[element as keyof Statistics<number>]}
+                    isAssigned={true}
+                    changeStats={changeStats}
+                    statPoints={statPool}
+                  />
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
       </div>
     </>
   )

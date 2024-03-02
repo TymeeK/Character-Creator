@@ -2,6 +2,7 @@
 import React from 'react'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { TableCell } from '@/components/ui/table'
 
 type Props = {
   element: string
@@ -19,57 +20,59 @@ export const StatLabel: React.FC<Props> = ({
   statPoints,
 }) => {
   return (
-    <div>
-      <Label className='mr-2'>{element}</Label>
-      {isAssigned && (
-        <>
-          {statPoints === 72 ? (
-            <Button
-              onClick={changeStats}
-              name='decrement'
-              data-testid='decrement'
-              data-element={element}
-              disabled
-            >
-              -
-            </Button>
-          ) : (
-            <Button
-              onClick={changeStats}
-              name='decrement'
-              data-testid='decrement'
-              data-element={element}
-            >
-              -
-            </Button>
-          )}
-        </>
-      )}
-      <Label className='mr-2'>{stats}</Label>
-      {isAssigned && (
-        <>
-          {statPoints <= 0 ? (
-            <Button
-              onClick={changeStats}
-              name='increment'
-              data-element={element}
-              data-testid='increment'
-              disabled
-            >
-              +
-            </Button>
-          ) : (
-            <Button
-              onClick={changeStats}
-              name='increment'
-              data-element={element}
-              data-testid='increment'
-            >
-              +
-            </Button>
-          )}
-        </>
-      )}
-    </div>
+    <>
+      <TableCell>{element}</TableCell>
+      <TableCell>
+        {isAssigned && (
+          <>
+            {statPoints === 72 ? (
+              <Button
+                onClick={changeStats}
+                name='decrement'
+                data-testid='decrement'
+                data-element={element}
+                disabled
+              >
+                -
+              </Button>
+            ) : (
+              <Button
+                onClick={changeStats}
+                name='decrement'
+                data-testid='decrement'
+                data-element={element}
+              >
+                -
+              </Button>
+            )}
+          </>
+        )}
+        <Label className='mr-2'>{stats}</Label>
+        {isAssigned && (
+          <>
+            {statPoints <= 0 ? (
+              <Button
+                onClick={changeStats}
+                name='increment'
+                data-element={element}
+                data-testid='increment'
+                disabled
+              >
+                +
+              </Button>
+            ) : (
+              <Button
+                onClick={changeStats}
+                name='increment'
+                data-element={element}
+                data-testid='increment'
+              >
+                +
+              </Button>
+            )}
+          </>
+        )}
+      </TableCell>
+    </>
   )
 }
