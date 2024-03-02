@@ -42,8 +42,8 @@ const AssignStats = () => {
       ? setStatPool(prev => prev)
       : setStatPool(() => {
           const total = subtract(statPool, delta)
-          if (total < 0) return 0
-          else return total
+          if (!isGreaterThanZero(total)) return 0
+          return total
         })
   }
 
