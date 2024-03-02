@@ -96,6 +96,21 @@ const AssignStats = () => {
     removeStatPoints(element, delta)
   }
 
+  const checkUpperStatBounds = (element: keyof Statistics<number>) => {
+    const difference = subtract(statPoint[element], 18)
+    setStatPool(prevState => add(prevState, difference))
+    setStatPoint(prevState => ({
+      ...prevState,
+      [element]: 18,
+    }))
+  }
+
+  const checkLowerStatBounds = (element: keyof Statistics<number>) => {
+    const sum = add(statPoint[element], 0)
+    setStatPool(prevState => add(prevState, sum))
+    setStatPoint(prevState => ({ ...prevState, [element]: 0 }))
+  }
+
   const changeStats = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const button = e.target as HTMLButtonElement
@@ -110,18 +125,11 @@ const AssignStats = () => {
       lessThanZero = subtract(statPoint[element], delta)
     }
     if (isMax(greaterThanMax) && button.name === 'increment') {
-      const difference = subtract(statPoint[element], 18)
-      setStatPool(prevState => add(prevState, difference))
-      setStatPoint(prevState => ({
-        ...prevState,
-        [element]: 18,
-      }))
+      checkUpperStatBounds(element)
       return
     }
     if (!isGreaterThanZero(lessThanZero) && button.name === 'decrement') {
-      const sum = add(statPoint[element], 0)
-      setStatPool(prevState => add(prevState, sum))
-      setStatPoint(prevState => ({ ...prevState, [element]: 0 }))
+      checkLowerStatBounds(element)
       return
     }
 
