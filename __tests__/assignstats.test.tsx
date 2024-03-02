@@ -115,7 +115,8 @@ describe('Rendering AssignStats component', () => {
   it('Label should not go past 18', async () => {
     const label = screen.getAllByText('0')
     const increment = screen.getAllByTestId('increment')
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 5; i++) {
+      await user.keyboard('{Shift>}')
       await user.click(increment[0])
     }
     expect(label[0].innerHTML).toBe('18')
@@ -123,7 +124,8 @@ describe('Rendering AssignStats component', () => {
   const checkIfMaxOrZero = async () => {
     const label = screen.getByText('72 points remaining')
     const increment = screen.getAllByTestId('increment')
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
+      await user.keyboard('{Shift>}')
       await user.click(increment[0])
     }
     return label
@@ -200,7 +202,7 @@ describe('Rendering AssignStats component', () => {
     const label = screen.getByText('72 points remaining')
     const increment = screen.getAllByTestId('increment')
     for (let i = 0; i < increment.length; i++) {
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < 3; j++) {
         await user.keyboard('{Shift>}')
         await user.click(increment[i])
         await user.keyboard('{/Shift}')

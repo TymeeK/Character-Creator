@@ -8,7 +8,7 @@ type Props = {
   stats: number
   isAssigned: boolean
   changeStats?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  statPoints?: number
+  statPoints: number
 }
 
 export const StatLabel: React.FC<Props> = ({
@@ -48,7 +48,7 @@ export const StatLabel: React.FC<Props> = ({
       <Label className='mr-2'>{stats}</Label>
       {isAssigned && (
         <>
-          {statPoints === 0 ? (
+          {statPoints <= 0 ? (
             <Button
               onClick={changeStats}
               name='increment'

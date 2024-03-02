@@ -7,7 +7,14 @@ describe('StatLabel for RollStats Component', () => {
   const stats = 10
 
   beforeEach(() => {
-    render(<StatLabel element={element} stats={stats} isAssigned={false} />)
+    render(
+      <StatLabel
+        element={element}
+        stats={stats}
+        isAssigned={false}
+        statPoints={72}
+      />
+    )
   })
 
   it('The element is in the document', () => {
@@ -25,7 +32,14 @@ describe('StatLabel for AssignStats page', () => {
   const element = 'Dexterity'
   const stats = 18
   beforeEach(() => {
-    render(<StatLabel element={element} stats={stats} isAssigned={true} />)
+    render(
+      <StatLabel
+        element={element}
+        stats={stats}
+        isAssigned={true}
+        statPoints={72}
+      />
+    )
   })
 
   it('+ button for increasing stats', () => {

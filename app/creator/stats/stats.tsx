@@ -51,7 +51,7 @@ const Stats = ({ title, placeholder }: props) => {
 
       {rollStats !== null && rollStats && <RollStats />}
       {rollStats !== null && !rollStats && <AssignStats />}
-      {rollStats === null && <>Roll stats is null</>}
+      {/* {rollStats === null && <>Roll stats is null</>} */}
     </>
   )
 }

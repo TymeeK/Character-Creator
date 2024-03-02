@@ -40,7 +40,11 @@ const AssignStats = () => {
   ) => {
     isMax(statPoint[element])
       ? setStatPool(prev => prev)
-      : setStatPool(subtract(statPool, delta))
+      : setStatPool(() => {
+          const total = subtract(statPool, delta)
+          if (total < 0) return 0
+          else return total
+        })
   }
 
   const addToStatPoints = (
