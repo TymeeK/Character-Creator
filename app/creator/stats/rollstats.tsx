@@ -9,13 +9,13 @@ export const rollValues = (startingValues: number[]) => {
 }
 export const areAllElementsSame = (values: number[]) => {
   const firstElement = values[0]
-  while (values.every((element) => element === firstElement)) {
+  while (values.every(element => element === firstElement)) {
     values = rollValues([0, 0, 0, 0])
   }
   return values
 }
 export const removeSmallest = (values: number[]) => {
-  return values.filter((element) => element !== Math.min(...values))
+  return values.filter(element => element !== Math.min(...values))
 }
 
 export const calculateTotal = (values: number[]) => {
@@ -27,6 +27,7 @@ const RollStats = () => {
     Strength: 0,
     Dexterity: 0,
     Constitution: 0,
+    Intelligence: 0,
     Power: 0,
     Charisma: 0,
   })
@@ -37,6 +38,7 @@ const RollStats = () => {
       Strength: 0,
       Dexterity: 0,
       Constitution: 0,
+      Intelligence: 0,
       Power: 0,
       Charisma: 0,
     }
