@@ -24,14 +24,3 @@ type DerivedStats<T extends number> = {
 type CalculateDerivedStats<T extends Statistics<number>> = (
   stats: T
 ) => DerivedStats<number>
-
-const calculateStats: CalculateDerivedStats<Statistics<number>> = stats => {
-  const sanity = stats.pow * 5
-  const derivedStats: DerivedStats<number> = {
-    hp: Math.ceil((stats.str + stats.con) / 2),
-    wp: stats.pow,
-    san: stats.pow * 5,
-    bp: sanity - stats.pow,
-  }
-  return derivedStats
-}
