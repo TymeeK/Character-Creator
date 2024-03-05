@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from '@jest/globals'
+import { describe, expect, it, beforeEach, beforeAll } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
 import AssignStats, {
   subtract,
@@ -156,12 +156,9 @@ describe('Rendering AssignStats component', () => {
     const label = screen.getByText('72 points remaining')
     const increment = screen.getAllByTestId('increment')
     await user.keyboard('{Shift>}')
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
+    for (let i = 0; i < 6; i++) {
+      await user.click(increment[0])
+    }
     await user.keyboard('{/Shift}')
 
     const decrement = screen.getAllByTestId('decrement')
@@ -176,10 +173,9 @@ describe('Rendering AssignStats component', () => {
     const statLabel = screen.getAllByText('0')
     const increment = screen.getAllByTestId('increment')
     await user.keyboard('{Shift>}')
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
-    await user.click(increment[0])
+    for (let i = 0; i < 4; i++) {
+      await user.click(increment[0])
+    }
     await user.keyboard('{/Shift}')
 
     expect(statLabel[0].innerHTML).toBe('18')

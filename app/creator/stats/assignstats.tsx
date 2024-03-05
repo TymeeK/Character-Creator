@@ -6,7 +6,6 @@ import { StatLabel } from './statlabel'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -44,7 +43,7 @@ const AssignStats = () => {
 
   const removeFromStatPool = (
     element: keyof Statistics<number>,
-    delta: number
+    delta: number,
   ) => {
     isMax(statPoint[element])
       ? setStatPool(prev => prev)
@@ -57,7 +56,7 @@ const AssignStats = () => {
 
   const addToStatPoints = (
     element: keyof Statistics<number>,
-    delta: number
+    delta: number,
   ) => {
     setStatPoint(prevState => ({
       ...prevState,
@@ -70,7 +69,7 @@ const AssignStats = () => {
   const incrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    delta: number
+    delta: number,
   ) => {
     if (button.name !== 'increment') {
       return
@@ -87,7 +86,7 @@ const AssignStats = () => {
 
   const removeStatPoints = (
     element: keyof Statistics<number>,
-    delta: number
+    delta: number,
   ) => {
     setStatPoint(prevState => ({
       ...prevState,
@@ -99,7 +98,7 @@ const AssignStats = () => {
   const decrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    delta: number
+    delta: number,
   ) => {
     if (button.name !== 'decrement') {
       return
