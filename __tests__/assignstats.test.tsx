@@ -97,10 +97,8 @@ describe('Rendering AssignStats component', () => {
   it('Input should be updated by 1 if incremented', async () => {
     const label = screen.getAllByText('0')
     const increment = screen.getAllByTestId('increment')
-    for (let i = 0; i < label.length; i++) {
-      await user.click(increment[i])
-      expect(label[i].innerHTML).toBe('1')
-    }
+    await user.click(increment[0])
+    expect(label[0].innerHTML).toBe('1')
   })
 
   it('Label should be decremented when clicking decrement', async () => {

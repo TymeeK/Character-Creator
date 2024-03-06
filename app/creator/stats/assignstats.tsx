@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import DerivedStats from './derivedstats'
 
 export const isLessThanDefault = (statPoints: number): boolean => {
   return statPoints < 72 ? true : false
@@ -43,7 +44,7 @@ const AssignStats = () => {
 
   const removeFromStatPool = (
     element: keyof Statistics<number>,
-    delta: number,
+    delta: number
   ) => {
     isMax(statPoint[element])
       ? setStatPool(prev => prev)
@@ -56,7 +57,7 @@ const AssignStats = () => {
 
   const addToStatPoints = (
     element: keyof Statistics<number>,
-    delta: number,
+    delta: number
   ) => {
     setStatPoint(prevState => ({
       ...prevState,
@@ -69,7 +70,7 @@ const AssignStats = () => {
   const incrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    delta: number,
+    delta: number
   ) => {
     if (button.name !== 'increment') {
       return
@@ -86,7 +87,7 @@ const AssignStats = () => {
 
   const removeStatPoints = (
     element: keyof Statistics<number>,
-    delta: number,
+    delta: number
   ) => {
     setStatPoint(prevState => ({
       ...prevState,
@@ -98,7 +99,7 @@ const AssignStats = () => {
   const decrementStat = (
     button: HTMLButtonElement,
     element: keyof Statistics<number>,
-    delta: number,
+    delta: number
   ) => {
     if (button.name !== 'decrement') {
       return
@@ -175,6 +176,11 @@ const AssignStats = () => {
             })}
           </TableBody>
         </Table>
+        <DerivedStats
+          strength={statPoint['Strength']}
+          constitution={statPoint['Constitution']}
+          power={statPoint['Power']}
+        />
       </div>
     </>
   )
