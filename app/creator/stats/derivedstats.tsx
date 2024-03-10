@@ -1,12 +1,6 @@
 import { Label } from '@/components/ui/label'
 import React, { ReactNode, useEffect, useState } from 'react'
 
-type props = {
-  strength: number
-  constitution: number
-  power: number
-}
-
 export const calculateHP = (strength: number, constitution: number): number => {
   return Math.ceil((strength + constitution) / 2)
 }
@@ -18,25 +12,53 @@ export const calculateSanity = (power: number): number => {
 export const calculateBP = (sanity: number, power: number): number => {
   return sanity - power
 }
+
+type specificstats = {
+  statName: string
+  statNum: number
+}
+
+const SpecificStats = ({ statName, statNum }: specificstats) => {
+  return (
+    <div>
+      <h2 className='inline'>{statName} </h2>
+      <h2 className='inline'>{statNum}</h2>
+    </div>
+  )
+}
+
+type props = {
+  strength: number
+  constitution: number
+  power: number
+}
+
 const DerivedStats = ({ strength, constitution, power }: props) => {
+  const statLabels: string[] = [
+    'Hit Points',
+    'Willpower Points',
+    'Sanity',
+    'Breaking Point',
+  ]
+
+  const statCalculate = [
+    calculateHP(strength, constitution),
+    power,
+    calculateSanity(power),
+    calculateBP(calculateSanity(power), power),
+  ]
+
   return (
     <>
-      <div>
-        <Label>Hit Points: </Label>
-        <Label>{calculateHP(strength, constitution)}</Label>
-      </div>
-      <div>
-        <Label>Willpower Points: </Label>
-        <Label>{power}</Label>
-      </div>
-      <div>
-        <Label>Sanity: </Label>
-        <Label>{calculateSanity(power)}</Label>
-      </div>
-      <div>
-        <Label>Breaking Point:</Label>
-        <Label>{calculateBP(calculateSanity(power), power)}</Label>
-      </div>
+      {statLabels.map((element, index) => {
+        return (
+          <SpecificStats
+            key={index}
+            statName={element}
+            statNum={statCalculate[index]}
+          />
+        )
+      })}
     </>
   )
 }

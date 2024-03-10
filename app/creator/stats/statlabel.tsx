@@ -3,6 +3,12 @@ import React from 'react'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { TableCell } from '@/components/ui/table'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 type Props = {
   element: string
@@ -21,7 +27,7 @@ export const StatLabel: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <TableCell>{element}</TableCell>
+      <TableCell className='font-bold'>{element}</TableCell>
       <TableCell>
         {isAssigned && (
           <>
@@ -36,18 +42,27 @@ export const StatLabel: React.FC<Props> = ({
                 -
               </Button>
             ) : (
-              <Button
-                onClick={changeStats}
-                name='decrement'
-                data-testid='decrement'
-                data-element={element}
-              >
-                -
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Button
+                      onClick={changeStats}
+                      name='decrement'
+                      data-testid='decrement'
+                      data-element={element}
+                    >
+                      -
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Shift + click to subtract 5</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             )}
           </>
         )}
-        <Label className='mr-2'>{stats}</Label>
+        <Label className='m-2 w-3 max-w-3'>{stats}</Label>
         {isAssigned && (
           <>
             {statPoints <= 0 ? (
@@ -61,14 +76,23 @@ export const StatLabel: React.FC<Props> = ({
                 +
               </Button>
             ) : (
-              <Button
-                onClick={changeStats}
-                name='increment'
-                data-element={element}
-                data-testid='increment'
-              >
-                +
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Button
+                      onClick={changeStats}
+                      name='increment'
+                      data-element={element}
+                      data-testid='increment'
+                    >
+                      +
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Shift + click to add 5</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             )}
           </>
         )}

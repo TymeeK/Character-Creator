@@ -151,36 +151,45 @@ const AssignStats = () => {
 
   return (
     <>
-      <div>
-        <Label>{statPool} points remaining</Label>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Stats</TableHead>
-              <TableHead>Stat Points</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Object.keys(statPoint).map((element, index) => {
-              return (
-                <TableRow key={index}>
-                  <StatLabel
-                    element={element}
-                    stats={statPoint[element as keyof Statistics<number>]}
-                    isAssigned={true}
-                    changeStats={changeStats}
-                    statPoints={statPool}
-                  />
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-        <DerivedStats
-          strength={statPoint['Strength']}
-          constitution={statPoint['Constitution']}
-          power={statPoint['Power']}
-        />
+      <h1 className='inline'>{statPool} points remaining</h1>
+      <div className='flex bg-slate-100'>
+        <div className='w-1/2 border'>
+          <Table className='w-full'>
+            <TableHeader>
+              <TableRow>
+                <TableHead>
+                  <h2>Stats</h2>
+                </TableHead>
+                <TableHead>
+                  <h2>Stat Points</h2>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Object.keys(statPoint).map((element, index) => {
+                return (
+                  <TableRow key={index}>
+                    <StatLabel
+                      element={element}
+                      stats={statPoint[element as keyof Statistics<number>]}
+                      isAssigned={true}
+                      changeStats={changeStats}
+                      statPoints={statPool}
+                    />
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className='w-1/2 flex flex-col'>
+          <DerivedStats
+            strength={statPoint['Strength']}
+            constitution={statPoint['Constitution']}
+            power={statPoint['Power']}
+          />
+        </div>
       </div>
     </>
   )

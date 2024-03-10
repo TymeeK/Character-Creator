@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import React, { useRef, useState } from 'react'
 import { Statistics } from '@/Delta Green/Types/types'
 import { StatLabel } from './statlabel'
+import DerivedStats from './derivedstats'
 
 export const rollValues = (startingValues: number[]) => {
   return startingValues.map(() => Math.floor(Math.random() * 6) + 1)
@@ -78,6 +79,11 @@ const RollStats = () => {
             />
           )
         })}
+        <DerivedStats
+          strength={statsNum['Strength']}
+          constitution={statsNum['Constitution']}
+          power={statsNum['Power']}
+        />
       </div>
     </>
   )
