@@ -152,8 +152,8 @@ const AssignStats = () => {
   return (
     <>
       <h1 className='inline'>{statPool} points remaining</h1>
-      <div className='flex bg-slate-100 h-1/2'>
-        <Table className='w-full table-auto'>
+      <div className='flex bg-slate-100 h-3/4'>
+        <Table className='w-full h-full'>
           <TableHeader>
             <TableRow>
               <TableHead>

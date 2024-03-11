@@ -7,8 +7,6 @@ import AssignStats, {
   isGreaterThanZero as isGreaterThanZero,
   isMax,
 } from '@/app/creator/stats/assignstats'
-import { Statistics } from '@/Delta Green/Types/types'
-import userEvent from '@testing-library/user-event'
 
 describe('Total number of stats calculated', () => {
   const totalStats = 72
@@ -212,8 +210,8 @@ describe('Rendering table', () => {
   })
 
   it('Table is available', () => {
-    const table = screen.getByRole('table')
-    expect(table).toBeInTheDocument()
+    const table = screen.getAllByRole('table')
+    expect(table[0]).toBeInTheDocument()
   })
 
   it('Table header is available', () => {

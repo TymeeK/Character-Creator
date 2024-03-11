@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Stats from './stats/stats'
 import { Input } from '@/components/ui/input'
+import Professions from './professions/professions'
 
 const Creator = () => {
   return (
@@ -11,6 +12,7 @@ const Creator = () => {
           <Input type='text' placeholder='Character Name' />
           <h2>How would you like to determine your stats?</h2>
           <Stats title='Stats Method' placeholder='Choose Stats Method' />
+          <Professions />
         </div>
       </div>
     </>
