@@ -5,12 +5,13 @@ import { StatLabel } from './statlabel'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
 import DerivedStats from './derivedstats'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 export const isLessThanDefault = (statPoints: number): boolean => {
   return statPoints < 72 ? true : false
@@ -41,6 +42,8 @@ const AssignStats = () => {
     Power: 0,
     Charisma: 0,
   })
+
+  const router = useRouter()
 
   const removeFromStatPool = (
     element: keyof Statistics<number>,
@@ -151,7 +154,15 @@ const AssignStats = () => {
 
   return (
     <>
-      <h1 className='inline'>{statPool} points remaining</h1>
+      <div className='text-right'>
+        {statPool ? (
+          <Button disabled>{statPool} points remaining</Button>
+        ) : (
+          <Button onClick={() => router.push('/creator/professions')}>
+            Next
+          </Button>
+        )}
+      </div>
       <div className='flex bg-slate-100 h-3/4'>
         <Table className='w-full h-full'>
           <TableHeader>
