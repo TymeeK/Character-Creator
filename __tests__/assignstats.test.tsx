@@ -227,12 +227,12 @@ describe('Rendering table', () => {
   })
 
   it('First header for stats', () => {
-    const th = screen.getAllByRole('columnheader')
+    const th = screen.getAllByRole('heading', { level: 2 })
     expect(th[0].innerHTML).toBe('Stats')
   })
 
   it('Stat Number header', () => {
-    const th = screen.getAllByRole('columnheader')
+    const th = screen.getAllByRole('heading', { level: 2 })
     expect(th[1].innerHTML).toBe('Stat Points')
   })
 

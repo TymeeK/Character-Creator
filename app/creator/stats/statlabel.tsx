@@ -27,7 +27,7 @@ export const StatLabel: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <TableCell className='font-bold'>{element}</TableCell>
+      <TableCell className='font-bold '>{element}</TableCell>
       <TableCell>
         {isAssigned && (
           <>

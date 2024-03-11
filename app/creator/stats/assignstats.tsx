@@ -1,11 +1,11 @@
 'use client'
 import { Statistics } from '@/Delta Green/Types/types'
-import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { StatLabel } from './statlabel'
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -152,44 +152,39 @@ const AssignStats = () => {
   return (
     <>
       <h1 className='inline'>{statPool} points remaining</h1>
-      <div className='flex bg-slate-100'>
-        <div className='w-1/2 border'>
-          <Table className='w-full'>
-            <TableHeader>
-              <TableRow>
-                <TableHead>
-                  <h2>Stats</h2>
-                </TableHead>
-                <TableHead>
-                  <h2>Stat Points</h2>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {Object.keys(statPoint).map((element, index) => {
-                return (
-                  <TableRow key={index}>
-                    <StatLabel
-                      element={element}
-                      stats={statPoint[element as keyof Statistics<number>]}
-                      isAssigned={true}
-                      changeStats={changeStats}
-                      statPoints={statPool}
-                    />
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className='w-1/2 flex flex-col'>
-          <DerivedStats
-            strength={statPoint['Strength']}
-            constitution={statPoint['Constitution']}
-            power={statPoint['Power']}
-          />
-        </div>
+      <div className='flex bg-slate-100 h-1/2'>
+        <Table className='w-full table-auto'>
+          <TableHeader>
+            <TableRow>
+              <TableHead>
+                <h2>Stats</h2>
+              </TableHead>
+              <TableHead>
+                <h2>Stat Points</h2>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.keys(statPoint).map((element, index) => {
+              return (
+                <TableRow key={index}>
+                  <StatLabel
+                    element={element}
+                    stats={statPoint[element as keyof Statistics<number>]}
+                    isAssigned={true}
+                    changeStats={changeStats}
+                    statPoints={statPool}
+                  />
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+        <DerivedStats
+          strength={statPoint['Strength']}
+          constitution={statPoint['Constitution']}
+          power={statPoint['Power']}
+        />
       </div>
     </>
   )

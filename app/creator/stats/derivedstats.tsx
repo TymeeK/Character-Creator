@@ -1,5 +1,12 @@
-import { Label } from '@/components/ui/label'
-import React, { ReactNode, useEffect, useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import React from 'react'
 
 export const calculateHP = (strength: number, constitution: number): number => {
   return Math.ceil((strength + constitution) / 2)
@@ -20,10 +27,14 @@ type specificstats = {
 
 const SpecificStats = ({ statName, statNum }: specificstats) => {
   return (
-    <div>
-      <h2 className='inline'>{statName} </h2>
-      <h2 className='inline'>{statNum}</h2>
-    </div>
+    <>
+      <TableCell>
+        <h2>{statName} </h2>
+      </TableCell>
+      <TableCell className='pl-20'>
+        <h2>{statNum}</h2>
+      </TableCell>
+    </>
   )
 }
 
@@ -49,17 +60,30 @@ const DerivedStats = ({ strength, constitution, power }: props) => {
   ]
 
   return (
-    <>
-      {statLabels.map((element, index) => {
-        return (
-          <SpecificStats
-            key={index}
-            statName={element}
-            statNum={statCalculate[index]}
-          />
-        )
-      })}
-    </>
+    <Table className='w-full table-auto h-full'>
+      <TableHeader>
+        <TableRow>
+          <TableHead>
+            <h2>Derived Stat</h2>
+          </TableHead>
+          <TableHead>
+            <h2>Derived Points</h2>
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {statLabels.map((element, index) => {
+          return (
+            <TableRow key={index}>
+              <SpecificStats
+                statName={element}
+                statNum={statCalculate[index]}
+              />
+            </TableRow>
+          )
+        })}
+      </TableBody>
+    </Table>
   )
 }
 
