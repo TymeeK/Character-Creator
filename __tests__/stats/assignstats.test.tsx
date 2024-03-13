@@ -1,4 +1,11 @@
-import { describe, expect, it, beforeEach, beforeAll } from '@jest/globals'
+import {
+  describe,
+  expect,
+  it,
+  beforeEach,
+  beforeAll,
+  jest,
+} from '@jest/globals'
 import { render, screen } from '@testing-library/react'
 import AssignStats, {
   subtract,
@@ -7,6 +14,7 @@ import AssignStats, {
   isGreaterThanZero as isGreaterThanZero,
   isMax,
 } from '@/app/creator/stats/assignstats'
+import { useRouter } from 'next/navigation'
 
 describe('Total number of stats calculated', () => {
   const totalStats = 72
@@ -203,7 +211,9 @@ describe('Total number of stats calculated', () => {
 //     expect(label.innerHTML).toBe('0 points remaining')
 //   })
 // })
-
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}))
 describe('Rendering table', () => {
   beforeEach(() => {
     render(<AssignStats />)

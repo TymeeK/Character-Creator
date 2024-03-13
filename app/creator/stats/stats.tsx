@@ -17,7 +17,7 @@ type props = {
   placeholder: string
 }
 
-const Stats = ({ title, placeholder }: props) => {
+const Stats: React.FC<props> = ({ title, placeholder }: props) => {
   const [options, setOptions] = useState(['Roll Stats', 'Assign Stats'])
   const [rollStats, setRollStats] = useState<boolean | null>(null)
 

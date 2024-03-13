@@ -12,6 +12,7 @@ import {
 import DerivedStats from './derivedstats'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 export const isLessThanDefault = (statPoints: number): boolean => {
   return statPoints < 72 ? true : false
@@ -43,7 +44,7 @@ const AssignStats = () => {
     Charisma: 0,
   })
 
-  const router = useRouter()
+  const router: AppRouterInstance = useRouter()
 
   const removeFromStatPool = (
     element: keyof Statistics<number>,
