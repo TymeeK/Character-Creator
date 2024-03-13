@@ -14,7 +14,8 @@ import AssignStats, {
   isGreaterThanZero as isGreaterThanZero,
   isMax,
 } from '@/app/creator/stats/assignstats'
-import { useRouter } from 'next/navigation'
+
+import { AppRouterContextProviderMock } from './app-router-context-provider-mock'
 
 describe('Total number of stats calculated', () => {
   const totalStats = 72
@@ -211,12 +212,15 @@ describe('Total number of stats calculated', () => {
 //     expect(label.innerHTML).toBe('0 points remaining')
 //   })
 // })
-jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(),
-}))
+
 describe('Rendering table', () => {
   beforeEach(() => {
-    render(<AssignStats />)
+    const push = jest.fn()
+    render(
+      <AppRouterContextProviderMock router={{ push }}>
+        <AssignStats />{' '}
+      </AppRouterContextProviderMock>
+    )
   })
 
   it('Table is available', () => {
