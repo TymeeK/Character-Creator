@@ -51,7 +51,6 @@ const Stats: React.FC<props> = ({ title, placeholder }: props) => {
 
       {rollStats !== null && rollStats && <RollStats />}
       {rollStats !== null && !rollStats && <AssignStats />}
-      {/* {rollStats === null && <>Roll stats is null</>} */}
     </>
   )
 }
