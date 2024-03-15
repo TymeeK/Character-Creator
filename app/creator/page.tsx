@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Stats from './stats/stats'
 import { Input } from '@/components/ui/input'
-import Professions from './professions/page'
+import ProfessionDropDown from './professions/page'
 
 const Creator = () => {
   return (
