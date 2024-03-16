@@ -33,7 +33,9 @@ const ProfessionDropDown = () => {
             </SelectContent>
           </Select>
         </div>
-        <h2>Character Professional Skills</h2>
+        <div className='w-3/4'>
+          <h2>Character Professional Skills</h2>
+        </div>
       </div>
     </>
   )
