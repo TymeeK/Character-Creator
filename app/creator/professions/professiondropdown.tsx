@@ -14,7 +14,8 @@ const ProfessionDropDown = () => {
     <>
       <h1 className='text-center'>Professions</h1>
       <div className='flex h-screen w-screen flex-col items-center'>
-        <div className='flex w-3/4 bg-purple-100'>
+        <div className='w-3/4 bg-purple-100'>
+          <h2>Select your Profession</h2>
           <Select>
             <SelectTrigger>
               <SelectValue placeholder='Professions' />
@@ -32,6 +33,7 @@ const ProfessionDropDown = () => {
             </SelectContent>
           </Select>
         </div>
+        <h2>Character Professional Skills</h2>
       </div>
     </>
   )
