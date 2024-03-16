@@ -6,9 +6,9 @@ import ProfessionDropDown from './professions/page'
 const Creator = () => {
   return (
     <>
-      <div className='w-screen flex justify-center h-screen'>
+      <div className='flex h-screen w-screen justify-center'>
         <div className='w-3/4'>
-          <h1>Agent Creation</h1>
+          <h1 className='text-center'>Agent Creation</h1>
           <Input type='text' placeholder='Character Name' />
           <h2>How would you like to determine your stats?</h2>
           <Stats title='Stats Method' placeholder='Choose Stats Method' />
