@@ -38,7 +38,7 @@ type CSorEngineer = {
   }
 }
 
-type Professions = Anthropologist | CSorEngineer
+export type Professions = Anthropologist | CSorEngineer
 
 export const professions: Professions[] = [
   {
