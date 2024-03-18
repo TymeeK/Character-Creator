@@ -5,24 +5,12 @@ type Anthropologist = {
     | {
         anthropology: Skill<Anthropology, AnthropologyBaseLevel>
         bureaucracy: Skill<Bureaucracy, BureaucracyBaseLevel>
-        foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>[]
+        foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>,
+        foreignLanguage2: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
         history: Skill<HistorySkill, HistoryBaseLevel>
         occult: Skill<Occult, OccultBaseLevel>
         persuade: Skill<Persuade, PersuadeBaseLevel>
         archeology?: Skill<Archeology, ArcheologyBaseLevel>
-        humint?: Skill<HumInt, HumIntBaseLevel>
-        navigate?: Skill<Navigate, NavigateBaseLevel>
-        ride?: Skill<Ride, RideBaseLevel>
-        search?: Skill<Search, SearchBaseLevel>
-      }
-    | {
-        archeology: Skill<Archeology, ArcheologyBaseLevel>
-        bureaucracy: Skill<Bureaucracy, BureaucracyBaseLevel>
-        foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>[]
-        history: Skill<HistorySkill, HistoryBaseLevel>
-        occult: Skill<Occult, OccultBaseLevel>
-        persuade: Skill<Persuade, PersuadeBaseLevel>
-        anthropology?: Skill<Anthropology, AnthropologyBaseLevel>
         humint?: Skill<HumInt, HumIntBaseLevel>
         navigate?: Skill<Navigate, NavigateBaseLevel>
         ride?: Skill<Ride, RideBaseLevel>
@@ -55,18 +43,18 @@ export const professions: Professions[] = [
         base: 10,
         currentLevel: 40,
       },
-      foreignLanguage: [
+      foreignLanguage: 
         {
-          name: 'Your choice',
+          name: 'Foreign language of your choice',
           base: 0,
           currentLevel: 50,
         },
+      foreignLanguage2: 
         {
-          name: 'Your choice',
+          name: 'Foreign language of your choice',
           base: 0,
           currentLevel: 40,
         },
-      ],
       history: {
         name: 'History',
         base: 10,
