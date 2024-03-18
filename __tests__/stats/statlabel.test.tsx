@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeEach } from '@jest/globals'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { StatLabel } from '@/app/creator/stats/statlabel'
+import { StatLabel } from '@/app/dg/creator/stats/statlabel'
 
 describe('StatLabel for RollStats Component', () => {
   const element = 'Strength'

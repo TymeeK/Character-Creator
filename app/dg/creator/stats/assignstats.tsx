@@ -159,7 +159,7 @@ const AssignStats = () => {
         {statPool ? (
           <Button disabled>{statPool} points remaining</Button>
         ) : (
-          <Button onClick={() => router.push('/creator/professions')}>
+          <Button onClick={() => router.push('/dg/creator/professions')}>
             Next
           </Button>
         )}

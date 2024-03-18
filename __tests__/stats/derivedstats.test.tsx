@@ -2,7 +2,7 @@ import DerivedStats, {
   calculateBP,
   calculateHP,
   calculateSanity,
-} from '@/app/creator/stats/derivedstats'
+} from '@/app/dg/creator/stats/derivedstats'
 import { describe, it, beforeEach, expect } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
 

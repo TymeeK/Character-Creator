@@ -4,9 +4,9 @@ import RollStats, {
   removeSmallest,
   calculateTotal,
   areAllElementsSame,
-} from '@/app/creator/stats/rollstats'
+} from '@/app/dg/creator/stats/rollstats'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { StatLabel } from '@/app/creator/stats/statlabel'
+import { StatLabel } from '@/app/dg/creator/stats/statlabel'
 
 describe('Calculating all stats', () => {
   it('Calculate values greater than 0', () => {
@@ -26,7 +26,7 @@ describe('Calculating all stats', () => {
   it('All stats are same check', () => {
     const sameValue = [1, 1, 1, 1]
     const newValues = areAllElementsSame(sameValue)
-    expect(newValues.every((element) => element === sameValue[0])).toBeFalsy()
+    expect(newValues.every(element => element === sameValue[0])).toBeFalsy()
   })
 
   it('Remove smallest value', () => {

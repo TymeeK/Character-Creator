@@ -13,7 +13,7 @@ import AssignStats, {
   isLessThanDefault as isLessThanDefault,
   isGreaterThanZero as isGreaterThanZero,
   isMax,
-} from '@/app/creator/stats/assignstats'
+} from '@/app/dg/creator/stats/assignstats'
 
 import { AppRouterContextProviderMock } from './app-router-context-provider-mock'
 

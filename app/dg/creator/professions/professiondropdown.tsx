@@ -6,17 +6,27 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select'
-import React from 'react'
+import React, { useState } from 'react'
 import { professions, Professions } from '@/Delta Green/Types/professions'
+import ProfessionSkills from './professionskills'
 
 const ProfessionDropDown = () => {
+  const [currentProfession, setCurrentProfession] = useState<Professions>()
+
+  const selectProfession = (e: string) => {
+    const selected: Professions | undefined = professions.find(
+      (profession: Professions) => profession.name === e
+    )
+    setCurrentProfession(selected)
+  }
+
   return (
     <>
       <h1 className='text-center'>Professions</h1>
       <div className='flex h-screen w-screen flex-col items-center'>
         <div className='w-3/4 bg-purple-100'>
           <h2>Select your Profession</h2>
-          <Select>
+          <Select onValueChange={selectProfession}>
             <SelectTrigger>
               <SelectValue placeholder='Professions' />
             </SelectTrigger>
@@ -34,7 +44,7 @@ const ProfessionDropDown = () => {
           </Select>
         </div>
         <div className='w-3/4'>
-          <h2>Character Professional Skills</h2>
+          <ProfessionSkills profession={currentProfession} />
         </div>
       </div>
     </>
