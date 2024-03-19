@@ -17,24 +17,24 @@ type Anthropologist = {
       Skill<Navigate, NavigateBaseLevel>,
       Skill<Ride, RideBaseLevel>,
       Skill<Search, SearchBaseLevel>,
-      Skill<Survival, SurvivalBaseLevel>
+      Skill<Survival, SurvivalBaseLevel>,
     ]
   }
 }
 
-type CSorEngineer = {
-  name: 'Computer Science' | 'Engineer'
-  numBonds: 3
-  professionalSkills: {
-    computerScience: Skill<ComputerScience, ComputerScienceBaseLevel>
-  }
-  options: {
-    num: 3
-    skills: []
-  }
-}
+// type CSorEngineer = {
+//   name: 'Computer Science' | 'Engineer'
+//   numBonds: 3
+//   professionalSkills: {
+//     computerScience: Skill<ComputerScience, ComputerScienceBaseLevel>
+//   }
+//   options: {
+//     num: 3
+//     skills: []
+//   }
+// }
 
-export type Professions = Anthropologist | CSorEngineer
+export type Professions = Anthropologist
 
 export const professions: Professions[] = [
   {
