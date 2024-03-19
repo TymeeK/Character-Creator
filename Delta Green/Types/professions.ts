@@ -1,15 +1,16 @@
 type Anthropologist = {
   name: 'Anthropologist' | 'Historian'
   numBonds: 4
-  professionalSkills: {
-    anthropology: Skill<Anthropology, AnthropologyBaseLevel>
-    bureaucracy: Skill<Bureaucracy, BureaucracyBaseLevel>
-    foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
-    foreignLanguage2: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
-    history: Skill<HistorySkill, HistoryBaseLevel>
-    occult: Skill<Occult, OccultBaseLevel>
-    persuade: Skill<Persuade, PersuadeBaseLevel>
-  }
+  professionalSkills: [
+    Skill<Anthropology, AnthropologyBaseLevel>,
+    Skill<Bureaucracy, BureaucracyBaseLevel>,
+    Skill<ForeignLanguage, ForeignLanguageBaseLevel>,
+    Skill<ForeignLanguage, ForeignLanguageBaseLevel>,
+    Skill<HistorySkill, HistoryBaseLevel>,
+    Skill<Occult, OccultBaseLevel>,
+    Skill<Persuade, PersuadeBaseLevel>
+  ]
+
   options: {
     num: 4
     skills: [
@@ -18,7 +19,7 @@ type Anthropologist = {
       Skill<Navigate, NavigateBaseLevel>,
       Skill<Ride, RideBaseLevel>,
       Skill<Search, SearchBaseLevel>,
-      Skill<Survival, SurvivalBaseLevel>,
+      Skill<Survival, SurvivalBaseLevel>
     ]
   }
 }
@@ -41,43 +42,43 @@ export const professions: Professions[] = [
   {
     name: 'Anthropologist',
     numBonds: 4,
-    professionalSkills: {
-      anthropology: {
+    professionalSkills: [
+      {
         name: 'Anthropology',
         base: 0,
         currentLevel: 50,
       },
-      bureaucracy: {
+      {
         name: 'Bureaucracy',
         base: 10,
         currentLevel: 40,
       },
-      foreignLanguage: {
-        name: 'Foreign language of your choice',
+      {
+        name: 'Your choice of language 1',
         base: 0,
         currentLevel: 50,
       },
-      foreignLanguage2: {
-        name: 'Foreign language of your choice',
+      {
+        name: 'Your choice of language 2',
         base: 0,
         currentLevel: 40,
       },
-      history: {
+      {
         name: 'History',
         base: 10,
         currentLevel: 60,
       },
-      occult: {
+      {
         name: 'Occult',
         base: 10,
         currentLevel: 40,
       },
-      persuade: {
+      {
         name: 'Persuade',
         base: 20,
         currentLevel: 40,
       },
-    },
+    ],
     options: {
       num: 4,
       skills: [

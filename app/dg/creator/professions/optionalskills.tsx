@@ -13,7 +13,6 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
 
   const checkCheckBox = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const target: EventTarget & HTMLInputElement = e.target
-    console.log(`Element is checked: ${target.checked}`)
     target.checked ? numChecked.current++ : numChecked.current--
   }
 
