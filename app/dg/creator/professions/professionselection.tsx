@@ -9,8 +9,9 @@ import {
 import React, { useState } from 'react'
 import { professions, Professions } from '@/Delta Green/Types/professions'
 import ProfessionSkills from './professionskills'
+import OptionalSkills from './optionalskills'
 
-const ProfessionDropDown = () => {
+const ProfessionSelection = () => {
   const [currentProfession, setCurrentProfession] = useState<Professions>()
 
   const selectProfession = (e: string) => {
@@ -43,12 +44,17 @@ const ProfessionDropDown = () => {
             </SelectContent>
           </Select>
         </div>
-        <div className='w-3/4'>
-          <ProfessionSkills profession={currentProfession} />
+        <div className='flex w-3/4'>
+          <div className='w-1/2'>
+            <ProfessionSkills profession={currentProfession} />
+          </div>
+          <div className='w-1/2'>
+            <OptionalSkills profession={currentProfession} />
+          </div>
         </div>
       </div>
     </>
   )
 }
 
-export default ProfessionDropDown
+export default ProfessionSelection

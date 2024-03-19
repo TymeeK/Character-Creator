@@ -1,8 +1,8 @@
 import React from 'react'
-import ProfessionDropDown from './professiondropdown'
+import ProfessionSelection from './professionselection'
 
 const Professions: React.FC = () => {
-  return <ProfessionDropDown />
+  return <ProfessionSelection />
 }
 
 export default Professions

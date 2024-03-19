@@ -1,21 +1,25 @@
 type Anthropologist = {
-  name: 'Anthropologist'
+  name: 'Anthropologist' | 'Historian'
   numBonds: 4
-  professionalSkills:
-    | {
-        anthropology: Skill<Anthropology, AnthropologyBaseLevel>
-        bureaucracy: Skill<Bureaucracy, BureaucracyBaseLevel>
-        foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>,
-        foreignLanguage2: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
-        history: Skill<HistorySkill, HistoryBaseLevel>
-        occult: Skill<Occult, OccultBaseLevel>
-        persuade: Skill<Persuade, PersuadeBaseLevel>
-        archeology?: Skill<Archeology, ArcheologyBaseLevel>
-        humint?: Skill<HumInt, HumIntBaseLevel>
-        navigate?: Skill<Navigate, NavigateBaseLevel>
-        ride?: Skill<Ride, RideBaseLevel>
-        search?: Skill<Search, SearchBaseLevel>
-      }
+  professionalSkills: {
+    anthropology: Skill<Anthropology, AnthropologyBaseLevel>
+    bureaucracy: Skill<Bureaucracy, BureaucracyBaseLevel>
+    foreignLanguage: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
+    foreignLanguage2: Skill<ForeignLanguage, ForeignLanguageBaseLevel>
+    history: Skill<HistorySkill, HistoryBaseLevel>
+    occult: Skill<Occult, OccultBaseLevel>
+    persuade: Skill<Persuade, PersuadeBaseLevel>
+  }
+  options: {
+    num: 4
+    skills: [
+      Skill<HumInt, HumIntBaseLevel>,
+      Skill<Navigate, NavigateBaseLevel>,
+      Skill<Ride, RideBaseLevel>,
+      Skill<Search, SearchBaseLevel>,
+      Skill<Survival, SurvivalBaseLevel>
+    ]
+  }
 }
 
 type CSorEngineer = {
@@ -23,6 +27,10 @@ type CSorEngineer = {
   numBonds: 3
   professionalSkills: {
     computerScience: Skill<ComputerScience, ComputerScienceBaseLevel>
+  }
+  options: {
+    num: 3
+    skills: []
   }
 }
 
@@ -43,18 +51,16 @@ export const professions: Professions[] = [
         base: 10,
         currentLevel: 40,
       },
-      foreignLanguage: 
-        {
-          name: 'Foreign language of your choice',
-          base: 0,
-          currentLevel: 50,
-        },
-      foreignLanguage2: 
-        {
-          name: 'Foreign language of your choice',
-          base: 0,
-          currentLevel: 40,
-        },
+      foreignLanguage: {
+        name: 'Foreign language of your choice',
+        base: 0,
+        currentLevel: 50,
+      },
+      foreignLanguage2: {
+        name: 'Foreign language of your choice',
+        base: 0,
+        currentLevel: 40,
+      },
       history: {
         name: 'History',
         base: 10,
@@ -70,6 +76,36 @@ export const professions: Professions[] = [
         base: 20,
         currentLevel: 40,
       },
+    },
+    options: {
+      num: 4,
+      skills: [
+        {
+          name: 'HUMINT',
+          base: 10,
+          currentLevel: 50,
+        },
+        {
+          name: 'Navigate',
+          base: 10,
+          currentLevel: 50,
+        },
+        {
+          name: 'Ride',
+          base: 10,
+          currentLevel: 60,
+        },
+        {
+          name: 'Search',
+          base: 20,
+          currentLevel: 60,
+        },
+        {
+          name: 'Survival',
+          base: 10,
+          currentLevel: 50,
+        },
+      ],
     },
   },
 ]
