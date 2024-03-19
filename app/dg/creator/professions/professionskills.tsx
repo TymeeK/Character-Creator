@@ -12,9 +12,12 @@ const ProfessionSkills: React.FC<props> = ({ profession }: props) => {
     <>
       <ul>
         {skills ? (
-          Object.keys(skills).map((skill: string, index: number) => {
-            const { name, base, currentLevel } = skills[skill as keyof typeof skills]
-            return <li key={index}>{name}: {currentLevel}</li>
+          skills.map((skill, index) => {
+            return (
+              <li key={index}>
+                {skill.name}: {skill.currentLevel}
+              </li>
+            )
           })
         ) : (
           <></>
