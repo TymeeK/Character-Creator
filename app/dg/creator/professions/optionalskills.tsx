@@ -9,16 +9,14 @@ type props = {
 }
 const OptionalSkills: React.FC<props> = ({ profession }) => {
   const optional = profession ? profession.options : undefined
-  const [disabled, setDisabled] = useState<Boolean>(false)
-  const [isChecked, setIsChecked] = useState<CheckedState>(false)
-  const numCheckBoxesClicked = useRef(0)
+  const numChecked = useRef(0)
 
-  const checkCheckBox: React.MouseEventHandler<HTMLButtonElement> = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ): void => {
-    console.log(e)
-    console.log('')
+  const checkCheckBox = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const target: EventTarget & HTMLInputElement = e.target
+    console.log(`Element is checked: ${target.checked}`)
+    target.checked ? numChecked.current++ : numChecked.current--
   }
+
   return (
     <>
       <h2 className='text-center'>Optional Skills</h2>
@@ -35,15 +33,15 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
       {optional ? (
         optional.skills.map((element, index) => {
           return (
-            <>
-              <Checkbox
-                key={index}
-                onClick={checkCheckBox}
-                checked={isChecked}
+            <Fragment key={index}>
+              <input
+                type='checkbox'
+                onChange={checkCheckBox}
+                name={`${element.name}`}
               />
               <Label>{element.name}</Label>
               <br />
-            </>
+            </Fragment>
           )
         })
       ) : (
