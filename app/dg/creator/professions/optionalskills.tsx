@@ -1,5 +1,7 @@
 import { Professions } from '@/Delta Green/Types/professions'
 import React, { Fragment } from 'react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 
 type props = {
   profession: Professions | undefined
@@ -18,7 +20,13 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
       )}
       {optional ? (
         optional.skills.map((element, index) => {
-          return <li key={index}>{element.name}</li>
+          return (
+            <>
+              <Checkbox key={index} />
+              <Label>{element.name}</Label>
+              <br />
+            </>
+          )
         })
       ) : (
         <></>
