@@ -1,5 +1,4 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import React, { useRef, useState } from 'react'
 import { Statistics } from '@/Delta Green/Types/types'
 import { StatLabel } from './statlabel'
@@ -59,13 +58,13 @@ const RollStats = () => {
     <>
       <div className='flex h-screen flex-col'>
         {numRolls.current <= 0 ? (
-          <Button onClick={rollStats} disabled>
+          <button onClick={rollStats} isDisabled>
             Roll Stats ({numRolls.current} tries left)
-          </Button>
+          </button>
         ) : (
-          <Button onClick={rollStats}>
+          <button onClick={rollStats}>
             Roll Stats ({numRolls.current} tries left)
-          </Button>
+          </button>
         )}
 
         {Object.keys(statsNum).map((element, index) => {

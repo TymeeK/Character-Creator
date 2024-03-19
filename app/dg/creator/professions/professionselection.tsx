@@ -1,15 +1,15 @@
 'use client'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
 import React, { useState } from 'react'
 import { professions, Professions } from '@/Delta Green/Types/professions'
 import ProfessionSkills from './professionskills'
 import OptionalSkills from './optionalskills'
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownItem,
+  Button,
+  DropdownMenu,
+} from '@nextui-org/react'
 
 const ProfessionSelection = () => {
   const [currentProfession, setCurrentProfession] = useState<Professions>()
@@ -27,7 +27,23 @@ const ProfessionSelection = () => {
       <div className='flex h-screen w-screen flex-col items-center'>
         <div className='w-3/4 bg-purple-100'>
           <h2>Select your Profession</h2>
-          <Select onValueChange={selectProfession}>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button variant='bordered'>Professions</Button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              {professions.map((profession: Professions, index: number) => {
+                return (
+                  <React.Fragment key={index}>
+                    <DropdownItem key={profession.name}>
+                      {profession.name}
+                    </DropdownItem>
+                  </React.Fragment>
+                )
+              })}
+            </DropdownMenu>
+          </Dropdown>
+          {/* <Select onValueChange={selectProfession}>
             <SelectTrigger>
               <SelectValue placeholder='Professions' />
             </SelectTrigger>
@@ -42,7 +58,7 @@ const ProfessionSelection = () => {
                 )
               })}
             </SelectContent>
-          </Select>
+          </Select> */}
         </div>
         <div className='flex w-3/4'>
           <div className='w-1/2'>

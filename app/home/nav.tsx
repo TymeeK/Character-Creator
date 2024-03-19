@@ -1,8 +1,6 @@
 import Logo from '../../Images/logo.png'
 import React from 'react'
 import Image from 'next/image'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 
 const Nav: React.FC = () => {
   return (
@@ -19,16 +17,16 @@ const Nav: React.FC = () => {
       </div>
       <div className='text-right w-1/2 bg-white'>
         <a>
-          <Label>Home |</Label>
+          <label>Home |</label>
         </a>
         <a>
-          <Label> About |</Label>
+          <label> About |</label>
         </a>
         <a>
-          <Label> Contact</Label>
+          <label> Contact</label>
         </a>
-        <Label> Login </Label>
-        <Button>Signup </Button>
+        <label> Login </label>
+        <button>Signup </button>
       </div>
     </div>
   )

@@ -1,8 +1,5 @@
 import { Professions } from '@/Delta Green/Types/professions'
 import React, { Fragment, useRef, useState } from 'react'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { CheckedState } from '@radix-ui/react-checkbox'
 
 type props = {
   profession: Professions | undefined
@@ -21,9 +18,9 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
       <h2 className='text-center'>Optional Skills</h2>
       {optional ? (
         <>
-          <Label>
+          <label>
             Pick {optional.num} skills from the {optional.skills.length}
-          </Label>
+          </label>
           <br />
         </>
       ) : (
@@ -38,7 +35,7 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
                 onChange={checkCheckBox}
                 name={`${element.name}`}
               />
-              <Label>{element.name}</Label>
+              <label>{element.name}</label>
               <br />
             </Fragment>
           )

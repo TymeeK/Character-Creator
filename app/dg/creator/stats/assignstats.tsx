@@ -2,15 +2,7 @@
 import { Statistics } from '@/Delta Green/Types/types'
 import React, { useState } from 'react'
 import { StatLabel } from './statlabel'
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import DerivedStats from './derivedstats'
-import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
@@ -157,46 +149,34 @@ const AssignStats = () => {
     <>
       <div className='text-right'>
         {statPool ? (
-          <Button disabled>{statPool} points remaining</Button>
+          <button isDisabled>{statPool} points remaining</button>
         ) : (
-          <Button onClick={() => router.push('/dg/creator/professions')}>
+          <button onClick={() => router.push('/dg/creator/professions')}>
             Next
-          </Button>
+          </button>
         )}
       </div>
       <div className='flex bg-slate-100 h-3/4'>
-        <Table className='w-full h-full'>
-          <TableHeader>
-            <TableRow>
-              <TableHead>
-                <h2>Stats</h2>
-              </TableHead>
-              <TableHead>
-                <h2>Stat Points</h2>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Object.keys(statPoint).map((element, index) => {
-              return (
-                <TableRow key={index}>
-                  <StatLabel
-                    element={element}
-                    stats={statPoint[element as keyof Statistics<number>]}
-                    isAssigned={true}
-                    changeStats={changeStats}
-                    statPoints={statPool}
-                  />
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-        <DerivedStats
-          strength={statPoint['Strength']}
-          constitution={statPoint['Constitution']}
-          power={statPoint['Power']}
-        />
+        <div className='w-1/2'>
+          {Object.keys(statPoint).map((element, index) => {
+            return (
+              <StatLabel
+                element={element}
+                stats={statPoint[element as keyof Statistics<number>]}
+                isAssigned={true}
+                changeStats={changeStats}
+                statPoints={statPool}
+              />
+            )
+          })}
+        </div>
+        <div className='w-1/2'>
+          <DerivedStats
+            strength={statPoint['Strength']}
+            constitution={statPoint['Constitution']}
+            power={statPoint['Power']}
+          />
+        </div>
       </div>
     </>
   )
