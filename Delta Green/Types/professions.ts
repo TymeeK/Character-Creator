@@ -13,6 +13,7 @@ type Anthropologist = {
   options: {
     num: 4
     skills: [
+      Skill<Archeology, ArcheologyBaseLevel>,
       Skill<HumInt, HumIntBaseLevel>,
       Skill<Navigate, NavigateBaseLevel>,
       Skill<Ride, RideBaseLevel>,
@@ -80,6 +81,11 @@ export const professions: Professions[] = [
     options: {
       num: 4,
       skills: [
+        {
+          name: 'Archeology',
+          base: 0,
+          currentLevel: 40,
+        },
         {
           name: 'HUMINT',
           base: 10,

@@ -9,7 +9,13 @@ const OptionalSkills: React.FC<props> = ({ profession }) => {
   return (
     <>
       <h2 className='text-center'>Optional Skills</h2>
-      {optional ? <li>Pick {optional?.num} skills</li> : <></>}
+      {optional ? (
+        <li>
+          Pick {optional.num} skills from the {optional.skills.length}
+        </li>
+      ) : (
+        <></>
+      )}
       {optional ? (
         optional.skills.map((element, index) => {
           return <li key={index}>{element.name}</li>
