@@ -5,6 +5,7 @@ import { StatLabel } from './statlabel'
 import DerivedStats from './derivedstats'
 import { useRouter } from 'next/navigation'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { Button } from '@nextui-org/react'
 
 export const isLessThanDefault = (statPoints: number): boolean => {
   return statPoints < 72 ? true : false
@@ -149,14 +150,14 @@ const AssignStats = () => {
     <>
       <div className='text-right'>
         {statPool ? (
-          <button isDisabled>{statPool} points remaining</button>
+          <Button isDisabled>{statPool} points remaining</Button>
         ) : (
-          <button onClick={() => router.push('/dg/creator/professions')}>
+          <Button onClick={() => router.push('/dg/creator/professions')}>
             Next
-          </button>
+          </Button>
         )}
       </div>
-      <div className='flex bg-slate-100 h-3/4'>
+      <div className='flex  h-3/4'>
         <div className='w-1/2'>
           {Object.keys(statPoint).map((element, index) => {
             return (
