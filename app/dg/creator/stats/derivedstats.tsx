@@ -57,7 +57,11 @@ const DerivedStats = ({ strength, constitution, power }: props) => {
 
       {statLabels.map((element, index) => {
         return (
-          <SpecificStats statName={element} statNum={statCalculate[index]} />
+          <SpecificStats
+            key={index}
+            statName={element}
+            statNum={statCalculate[index]}
+          />
         )
       })}
     </>

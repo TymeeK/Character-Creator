@@ -161,6 +161,7 @@ const AssignStats = () => {
           {Object.keys(statPoint).map((element, index) => {
             return (
               <StatLabel
+                key={index}
                 element={element}
                 stats={statPoint[element as keyof Statistics<number>]}
                 isAssigned={true}
