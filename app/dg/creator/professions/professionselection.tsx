@@ -27,7 +27,7 @@ const ProfessionSelection = () => {
     <>
       <h1 className='text-center'>Professions</h1>
       <div className='flex h-screen flex-col items-center'>
-        <div className='w-3/4 bg-purple-100'>
+        <div className='w-3/4'>
           <h2>Select your Profession</h2>
           <Dropdown>
             <DropdownTrigger>
