@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { Statistics } from '@/Delta Green/Types/types'
 import { StatLabel } from './statlabel'
 import DerivedStats from './derivedstats'
+import { Button } from '@nextui-org/react'
 
 export const rollValues = (startingValues: number[]) => {
   return startingValues.map(() => Math.floor(Math.random() * 6) + 1)
@@ -58,9 +59,9 @@ const RollStats = () => {
     <>
       <div className='flex h-screen flex-col'>
         {numRolls.current <= 0 ? (
-          <button onClick={rollStats} isDisabled>
+          <Button onClick={rollStats} isDisabled>
             Roll Stats ({numRolls.current} tries left)
-          </button>
+          </Button>
         ) : (
           <button onClick={rollStats}>
             Roll Stats ({numRolls.current} tries left)
