@@ -10,6 +10,7 @@ const ProfessionSkills: React.FC<props> = ({ profession }: props) => {
 
   return (
     <>
+      <h2>Professional Skills</h2>
       <ul>
         {skills ? (
           skills.map((skill, index) => {
